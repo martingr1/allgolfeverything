@@ -13,12 +13,9 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_reviews')
 def get_reviews():
-    return render_template("reviews.html", reviews=mongo.db.all_golf.find())
-
-
-
+    return render_template("reviews.html", reviews=mongo.db.reviews.find())
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)
