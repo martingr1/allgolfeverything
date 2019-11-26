@@ -1,1 +1,27 @@
 {% extends 'base.html' %} {% block content %}
+<h3>Write your review</h3>
+<div class="row">
+    <form  action="" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <select id='type' name='type_name'>
+                <option value="" disabled selected>Choose Type of Review</option>
+                {% for type in review_type %}
+                    <option value="{{type.type_name}}">{{type.type_name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select id='brand' name='brand_name'>
+                <option value="" disabled selected>Choose Brand</option>
+                {% for brand in review_brand %}
+                    <option value="{{brand.brand_name}}">{{brand.brand_name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

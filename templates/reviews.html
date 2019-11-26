@@ -1,12 +1,14 @@
 {% extends 'base.html'%}
-{% block content %}    
+{% block content %}
+<h3>Read reviews</h3>    
   <ul class="collapsible">
   {% for review in reviews %}
     <li>
       <div class="collapsible-header"><i class="material-icons">golf_course</i>
-      {{review.type}} 
+      <strong>{{review.type}} - 
       {{review.brand}}
-      {{review.model}} 
+      {{review.model}}</strong>
+      <i class="material-icons">expand_more</i>
       </div>
       <div class="collapsible-body"><span>
       {{review.review_text}} - {{review.review_score}}</span>
