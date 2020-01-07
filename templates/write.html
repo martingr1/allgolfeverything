@@ -1,27 +1,69 @@
 {% extends 'base.html' %} {% block content %}
 <h3>Write your review</h3>
-<div class="row">
-    <form  action="" method="POST" class="col s12">
-        <div class="row">
-            <div class="input-field col s12">
-                <select id='type' name='type_name'>
-                <option value="" disabled selected>Choose Type of Review</option>
-                {% for type in review_type %}
-                    <option value="{{type.type_name}}">{{type.type_name}}</option>
-                {% endfor %}
+<div class="container">
+	<div class="row">
+		<form action="" method="POST" class="col s12">
+			<div class="row">
+				<div class="input-field col s8">
+					<select required name="category">
+                    <option value="" disabled selected>Choose Category</option>
+                {% for review in reviews %}      
+                        <option value="">{{review.category_name}}</option>
+                    {% endfor %}
                 </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <select id='brand' name='brand_name'>
-                <option value="" disabled selected>Choose Brand</option>
-                {% for brand in review_brand %}
-                    <option value="{{brand.brand_name}}">{{brand.brand_name}}</option>
-                {% endfor %}
+				</div>
+				<div>
+					<div class="input-field col s8">
+						<select required name="brand">
+                    <option value="" disabled selected>Choose Brand</option>
+                {% for review in reviews_one %}      
+                        <option value="">{{review.brand_name}}</option>
+                    {% endfor %}
                 </select>
-            </div>
-        </div>
-    </form>
+					</div>
+					<div class="col s4">
+						<button class="btn waves-effect waves-light" type="submit" name="action">Add new Brand<i class="material-icons right">send</i>
+                </button>
+					</div>
+				</div>
+				<div>
+					<div class="input-field col s8">
+						<select required name="brand">
+                    <option value="" disabled selected>Choose Model</option>
+                {% for review in reviews_two %}      
+                        <option value="">{{review.model}}</option>
+                    {% endfor %}
+                </select>
+					</div>
+					<div class="col s4">
+						<button class="btn waves-effect waves-light" type="submit" name="action">Add new Model<i class="material-icons right">send</i>
+                </button>
+					</div>
+				</div>
+				<div class="input-field col s12">
+					<select required name="brand">
+                    <option value="" disabled selected>Choose Score from 1-5</option>                 
+                        <option value="">1/5</option>
+                        <option value="">2/5</option>  
+                        <option value="">3/5</option>  
+                        <option value="">4/5</option>  
+                        <option value="">5/5</option>             
+                </select>
+				</div>
+				<div class="row">
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s6 push-s3">
+								<textarea id="textarea1" class="materialize-textarea"></textarea>
+								<label for="textarea1">Write your review here</label>
+							</div>
+						</div>
+					</form>
+				</div>
+				<button class="btn waves-effect waves-light" type="submit" name="action">Submit Review<i class="material-icons right">send</i>
+                </button>
+			</div>
+		</form>
+	</div>
 </div>
 {% endblock %}

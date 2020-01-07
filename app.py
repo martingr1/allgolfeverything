@@ -12,9 +12,8 @@ mongo = PyMongo(app)
 
 @app.route('/')
 @app.route('/add_review')
-def add_review():
-    return render_template("write.html",
-    review_brand=mongo.db.review_brand.find())
+def add_review():   
+    return render_template("write.html", reviews=mongo.db.reviews.find(), reviews_one=mongo.db.reviews.find(), reviews_two=mongo.db.reviews.find()) 
 
 @app.route('/get_reviews')
 def get_reviews():
