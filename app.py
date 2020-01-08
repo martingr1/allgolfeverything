@@ -11,6 +11,7 @@ app.config["MONGO_URI"] = os.environ.get('MONGO_URI', 'mongodb://localhost')
 mongo = PyMongo(app)
 
 @app.route('/')
+
 @app.route('/add_review')
 def add_review():   
     return render_template("write.html", reviews=mongo.db.reviews.find(), reviews_one=mongo.db.reviews.find(), reviews_two=mongo.db.reviews.find()) 
@@ -18,7 +19,6 @@ def add_review():
 @app.route('/get_reviews')
 def get_reviews():
     return render_template("reviews.html", reviews=mongo.db.reviews.find())
-
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

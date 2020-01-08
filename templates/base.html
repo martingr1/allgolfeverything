@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head> 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body background="/static/images/golf_background.jpg">
-        <h1>All golf</h1>
-        {% block content %}
-        {% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script type="text/javascript">
-         $(document).ready(function() {
+
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body background="/static/images/golf_background.jpg">
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
+					</li>
+					<li class=""><a
+							href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
+				</ul>
+			</div>
+		</nav>
+		<ul class="sidenav" id="mobile-demo">
+			<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
+			</li>
+			<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
+		</ul>
+	</header>
+	{% block content %}
+	{% endblock %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
             $('.collapsible').collapsible();
-            $('select').material_select();
+            $('select').formSelect();
             $('#textarea1').val('');
             M.textareaAutoResize($('#textarea1'));
+            $('.sidenav').sidenav();
+            $('.modal').modal();
         });
-    </script>
-    </body>
+	</script>
+</body>
+
 </html>
