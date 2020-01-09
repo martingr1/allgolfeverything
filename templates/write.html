@@ -55,13 +55,11 @@
 
 				<div class="input-field col s8">
                     <i class="material-icons prefix">star</i>
-					<select required name="review_score">
-                    <option value="" disabled selected>Choose Score from 1-5</option>                 
-                        <option value="1">1</option>
-                        <option value="2">2</option>  
-                        <option value="3">3</option>  
-                        <option value="4">4</option>  
-                        <option value="5">5</option>             
+					<select id="score" name="score">
+                    <option value="" disabled selected>Score</option>
+                {% for score in score %}      
+                        <option value="{{score.score}}">{{score.score}}</option>
+                    {% endfor %}
                 </select>
 				</div>
 

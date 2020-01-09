@@ -14,7 +14,7 @@ mongo = PyMongo(app)
 
 @app.route('/add_review')
 def add_review():   
-    return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find()) 
+    return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
 
 @app.route('/get_reviews')
 def get_reviews():
