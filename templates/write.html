@@ -1,108 +1,116 @@
 {% extends 'base.html' %} {% block content %}
-<h3>Write your review</h3>
-<div class="container">
+
+<div class="container write-wrapper">
+	<div class="s8">
+		<h3>Write your review</h3>
+	</div>
 	<div class="row">
-		<form action="" method="POST" class="col s12">
+		<form action="{{url_for('insert_review')}}" method="POST" class="col s12">
 			<div class="row">
 				<div class="input-field col s8">
-					<select required name="category">
+                    <i class="material-icons prefix">subject</i>
+					<select id="category" name="category_name">
                     <option value="" disabled selected>Choose Category</option>
-                {% for review in reviews %}      
-                        <option value="">{{review.category_name}}</option>
+                {% for category in category %}      
+                        <option value="{{category.category_name}}">{{category.category_name}}</option>
                     {% endfor %}
                 </select>
 				</div>
-				<div>
-					<div class="input-field col s8">
-						<select required name="brand">
+
+				<div class="input-field col s8">
+                    <i class="material-icons prefix">subject</i>
+					<select id="brand" name="brand_name">
                     <option value="" disabled selected>Choose Brand</option>
-                {% for review in reviews_one %}      
-                        <option value="">{{review.brand_name}}</option>
+                {% for brands in brands %}      
+                        <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
                 </select>
-					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-							href="#brandmodal">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-					<div id="brandmodal" class="modal">
-						<div class="modal-content">
-							<h4>Add new brand</h4>
-							<div class="row">
-								<form class="col s12">
-									<div class="row">
-										<div class="input-field col s12">
-											<textarea id="textarea1" class="materialize-textarea"></textarea>
-											<label for="textarea1">Please enter the name of the brand you would like to add and click submit.</label>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button class="btn waves-effect waves-light" type="submit" name="action">Submit New Brand<i class="material-icons left">send</i>
-                </button>
-							</div>
-						</div>
-					</div>
-					<div class="input-field col s8">
-						<select required name="brand">
+				</div>
+				<div class="col s4">
+					<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#brandmodal">
+						<i class="material-icons">add</i>
+					</a>
+				</div>
+
+				<div class="input-field col s8">
+                    <i class="material-icons prefix">subject</i>
+					<select id="model" name="model">
                     <option value="" disabled selected>Choose Model</option>
-                {% for review in reviews_two %}      
-                        <option value="">{{review.model}}</option>
+                {% for models in models %}      
+                        <option value="{{models.model}}">{{models.model}}</option>
                     {% endfor %}
                 </select>
-					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-                        href="#modelmodal">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-					<div id="modelmodal" class="modal">
-						<div class="modal-content">
-							<h4>Add new model</h4>
-							<div class="row">
-								<form class="col s12">
-									<div class="row">
-										<div class="input-field col s12">
-											<textarea id="textarea2" class="materialize-textarea"></textarea>
-											<label for="textarea2">Please enter the name of the model you would like to add and click submit.</label>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button class="btn waves-effect waves-light" type="submit" name="action">Submit New Brand<i class="material-icons left">send</i>
+				</div>
+				<div class="col s4">
+					<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#modelmodal">
+						<i class="material-icons">add</i>
+					</a>
+				</div>
+
+				<div class="input-field col s8">
+                    <i class="material-icons prefix">border_color</i>
+					<textarea name="review_text" type="text" id="review" class="materialize-textarea"></textarea>
+					<label for="review_text">Write your review here</label>
+				</div>
+
+				<div class="input-field col s8">
+                    <i class="material-icons prefix">star</i>
+					<select required name="review_score">
+                    <option value="" disabled selected>Choose Score from 1-5</option>                 
+                        <option value="1">1</option>
+                        <option value="2">2</option>  
+                        <option value="3">3</option>  
+                        <option value="4">4</option>  
+                        <option value="5">5</option>             
+                </select>
+				</div>
+
+                <div>
+					<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
                 </button>
-							</div>
-						</div>
+                </div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div id="brandmodal" class="modal">
+	<div class="modal-content">
+		<h4>Add new brand</h4>
+		<div class="row">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="textarea1" class="materialize-textarea"></textarea>
+						<label for="textarea1">Please enter the name of the brand you would like to add and click submit.</label>
 					</div>
 				</div>
-			</div>
-			<div class="input-field col s8">
-				<select required name="brand">
-                    <option value="" disabled selected>Choose Score from 1-5</option>                 
-                        <option value="">1</option>
-                        <option value="">2</option>  
-                        <option value="">3</option>  
-                        <option value="">4</option>  
-                        <option value="">5</option>             
-                </select>
-			</div>
-			<div class="row">
-				<form class="col s12">
-					<div class="row">
-						<div class="input-field col s6">
-							<textarea id="textarea1" class="materialize-textarea"></textarea>
-							<label for="textarea1">Write your review here</label>
-						</div>
-					</div>
-				</form>
-			</div>
-			<button class="btn waves-effect waves-light" type="submit" name="action">Submit Review<i class="material-icons right">send</i>
-                </button>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<input class="btn waves-effect waves-light" type="submit" name="action">Submit New Brand<i class="material-icons left">send</i>
+		</div>
 	</div>
-	</form>
-	{% endblock %}
+</div>
+
+<div id="modelmodal" class="modal">
+	<div class="modal-content">
+		<h4>Add new model</h4>
+		<div class="row">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="textarea2" class="materialize-textarea"></textarea>
+						<label for="textarea2">Please enter the name of the model you would like to add and click submit.</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit New Model<i class="material-icons left">send</i>
+                </button>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
