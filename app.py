@@ -26,6 +26,19 @@ def insert_review():
     reviews.insert_one(request.form.to_dict())
     return redirect(url_for('get_reviews'))
 
+@app.route('/insert_brand', methods=['POST'])
+def insert_brand():
+    brands = mongo.db.brands
+    brand_doc = {'brand_name': request.form.get('brand_name')}
+    brands.insert_one(brand_doc)
+    return redirect(url_for('add_review'))
+
+@app.route('/new_model', methods=['POST'])
+def new_model():
+    models = mongo.db.models
+    models.insert_one(request.form.to_dict())
+    return redirect(url_for('add_review'))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

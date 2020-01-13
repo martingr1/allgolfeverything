@@ -1,5 +1,11 @@
+body {
+    background-image: url("images/golf_background.jpg");
+    background-repeat: no-repeat;
+}
+
 .write-wrapper {
     background-color: #FFFAFA;
     opacity: 0.9;
     border-radius: 2%;
 }
+
