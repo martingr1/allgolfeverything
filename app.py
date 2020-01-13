@@ -33,10 +33,11 @@ def insert_brand():
     brands.insert_one(brand_doc)
     return redirect(url_for('add_review'))
 
-@app.route('/new_model', methods=['POST'])
-def new_model():
+@app.route('/insert_model', methods=['POST'])
+def insert_model():
     models = mongo.db.models
-    models.insert_one(request.form.to_dict())
+    model_doc = {'model_name': request.form.get('model_name')}
+    models.insert_one(model_doc)
     return redirect(url_for('add_review'))
 
 if __name__ == '__main__':
