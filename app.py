@@ -12,6 +12,10 @@ mongo = PyMongo(app)
 
 @app.route('/')
 
+@app.route('/get_index')
+def get_index():
+    return render_template("index.html")
+
 @app.route('/add_review')
 def add_review():   
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
