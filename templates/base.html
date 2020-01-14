@@ -44,9 +44,10 @@ body {
             $('.collapsible').collapsible();
             $('select').formSelect();
             $('#textarea2').val('');
-            M.textareaAutoResize($('#textarea1'));
+            M.textareaAutoResize($('#textarea'));
             $('.sidenav').sidenav();
             $('.modal').modal();
+             $('input#input_text, textarea#textarea').characterCounter();
         });
 	</script>
 </body>
