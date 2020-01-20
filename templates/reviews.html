@@ -1,21 +1,33 @@
 {% extends 'base.html'%}
 {% block content %}
-<h3>Read reviews</h3>    
-  <ul class="collapsible">
-  {% for review in reviews %}
-    <li>
-      <div class="collapsible-header"><i class="material-icons">golf_course</i>
-      <strong>{{review.category_name}} - 
+<div class="container">
+	<div class="content-wrapper">
+		<div class="row wrapper-heading">
+			<h3>Read reviews</h3>
+		</div>
+		{% for review in reviews %}
+		<div class="row">
+			<strong>{{review.category_name}} - 
       {{review.brand_name}}
       {{review.model}}</strong>
-      <i class="material-icons">expand_more</i>
-      </div>
-      <div class="collapsible-body"><span>
-      {{review.review_text}} - {{review.review_score}}</span>
-      </div>
-    </li>
-    {% endfor %}
+		</div>
+		<div class="row">
+			<div class="row col s8">
+				{{review.review_score}}
+				<span>
+      {{review.review_text}}</span>
+			</div>
+			<div class="col s4">
+				<a class="btn-floating btn-large waves-effect waves-light yellow modal-trigger" href="#brandmodal">
+					<i class="material-icons">add</i>
+				</a>
+				<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#brandmodal">
+					<i class="material-icons">add</i>
+				</a>
+			</div>
+		</div>
 
-  </ul>
-  
-  {% endblock %}
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

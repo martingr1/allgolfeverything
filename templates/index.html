@@ -1,8 +1,11 @@
 {% extends 'base.html'%}
 {% block content %}
-<div class="container content-wrapper">
-	<div class="row">
-	</div>
+<div class="container icon-wrapper">	
+		<a href="{{url_for('get_reviews')}}"><i class="col s12 m4 material-icons main-icons">art_track</i></a>
+	
+		<a href="{{url_for('add_review')}}"><i class="col s12 m4 material-icons main-icons">border_color</i></a>
+	
+		<a href="{{url_for('add_review')}}"><i class="col s12 m4 material-icons main-icons">search</i></a>
 </div>
 
 {% endblock %}

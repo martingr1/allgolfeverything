@@ -3,9 +3,28 @@ body {
     background-repeat: no-repeat;
 }
 
+.navbar {
+    color: blueviolet;
+}
+
+.icon-wrapper {
+    text-align: center;
+}
+.main-icons {
+    font-size: 100px;
+    padding: 25% 50px 10px;
+    color: blueviolet;
+}
+
 .content-wrapper {
     background-color: #FFFAFA;
     opacity: 0.9;
     border-radius: 2%;
+}
+
+.wrapper-heading {
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
 }
 
