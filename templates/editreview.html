@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<div class="content-wrapper">
+		<div class="row wrapper-heading">
+			<p class="">Edit your review</p>
+		</div>
+		<div class="row">
+			<form action="" method="POST" class="col s12">
+				<div class="row">
+					<div class="input-field col s8">
+						<i class="material-icons prefix">subject</i>
+						<select id="category" name="category_name">
+                    <option value="" disabled selected>Choose Category</option>
+                {% for category in category %}      
+                    {% if category.category_name ==  reviews.category_name %}
+                        <option value="{{category.category_name}}">{{category.category_name}}</option>
+                        {% else %}
+                    {% end if %}
+                {% endfor %}
+                </select>
+					</div>
+
+					<div class="input-field col s8">
+						<i class="material-icons prefix">subject</i>
+						<select id="brand" name="brand_name">
+                    <option value="" disabled selected>Choose Brand</option>
+                {% for brands in brands %}      
+                        <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
+                    {% endfor %}
+                </select>
+					</div>
+					<div class="col s4">
+						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
+							href="#brandmodal">
+							<i class="material-icons">add</i>
+						</a>
+					</div>
+
+					<div class="input-field col s8">
+						<i class="material-icons prefix">subject</i>
+						<select id="model" name="model_name">
+                    <option value="" disabled selected>Choose Model</option>
+                {% for models in models %}      
+                        <option value="{{models.model_name}}">{{models.model_name}}</option>
+                    {% endfor %}
+                </select>
+					</div>
+					<div class="col s4">
+						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
+							href="#modelmodal">
+							<i class="material-icons">add</i>
+						</a>
+					</div>
+
+					<div class="input-field col s8">
+						<i class="material-icons prefix">border_color</i>
+						<textarea name="review_text" type="text" id="review" class="materialize-textarea"></textarea>
+						<label for="review_text">Write your review here</label>
+					</div>
+
+					<div class="input-field col s8">
+						<i class="material-icons prefix">star</i>
+						<select id="score" name="score">
+                    <option value="" disabled selected>Score</option>
+                {% for score in score %}      
+                        <option value="{{score.score}}">{{score.score}}</option>
+                    {% endfor %}
+                </select>
+					</div>
+
+					<div class="col s8">
+						<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
+                </button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -44,6 +44,12 @@ def insert_model():
     models.insert_one(model_doc)
     return redirect(url_for('add_review'))
 
+@app.route('/edit_review/<review_id>')
+def edit_review(review_id):
+    the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    all_reviews = mongo.db.reviews.find()
+    return render_template('editreview.html', review=the_review, reviews=all_reviews)
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
