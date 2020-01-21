@@ -47,8 +47,22 @@ def insert_model():
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):
     the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    all_reviews = mongo.db.reviews.find()
-    return render_template('editreview.html', review=the_review, reviews=all_reviews)
+    all_categories = mongo.db.category.find()
+    all_brands = mongo.db.brands.find()
+    return render_template('editreview.html', review = the_review, category = all_categories, brands = all_brands)
+
+@app.route('/update_review/<review_id>', methods=["POST"])
+def update_review(review_id):
+    reviews = mongo.db.reviews
+    reviews.update( {'_id': ObjectId(review_id)},
+    {
+        'category_name':request.form.get('category_name'),
+        'brand_name': request.form.get('brand_name'),
+        'model_name': request.form.get('model_name'),
+        'review_text':request.form.get('review_text'),
+        'score':request.form.get('score')
+    })
+    return redirect(url_for('get_reviews'))
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

@@ -18,15 +18,14 @@
       {{review.review_text}}</span>
 			</div>
 			<div class="col s4">
-				<a class="btn-floating btn-large waves-effect waves-light yellow modal-trigger" href="{{url_for('edit_review', review_id=review._id)}}">
+				<a class="btn-floating btn-large waves-effect waves-light yellow" href="{{url_for('edit_review', review_id=review._id)}}">
 					<i class="material-icons">add</i>
 				</a>
-				<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#">
-					<i class="material-icons">add</i>
+				<a class="btn-floating btn-large waves-effect waves-light red" href="#">
+					<i class="material-icons">delete</i>
 				</a>
 			</div>
 		</div>
-
 		{% endfor %}
 	</div>
 </div>
