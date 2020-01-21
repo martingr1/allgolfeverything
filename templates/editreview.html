@@ -34,27 +34,19 @@
                 {% endfor %}
                 </select>
 					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-							href="#brandmodal">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
 
 					<div class="input-field col s8">
 						<i class="material-icons prefix">subject</i>
 						<select id="model" name="model_name">
                     <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
-                        <option value="{{models.model_name}}">{{models.model_name}}</option>
-                    {% endfor %}
+                    {% if models.model_name == review.model_name %}   
+                        <option value="{{models.model_name}}" selected>{{models.model_name}}</option>
+                    {% else %}
+                        <option value="{{models.brand_name}}">{{models.model_name}}</option>
+                    {% endif %}
+                {% endfor %}
                 </select>
-					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-							href="#modelmodal">
-							<i class="material-icons">add</i>
-						</a>
 					</div>
 
 					<div class="input-field col s8">
