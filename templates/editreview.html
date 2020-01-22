@@ -51,7 +51,7 @@
 
 					<div class="input-field col s8">
 						<i class="material-icons prefix">border_color</i>
-						<textarea name="review_text" type="text" id="review" class="materialize-textarea"></textarea>
+						<input id="review_text" name="review_text"  type="text" class="materialize-textarea" value ="{{review.review_text}}">
 						<label for="review_text">Write your review here</label>
 					</div>
 
@@ -59,9 +59,13 @@
 						<i class="material-icons prefix">star</i>
 						<select id="score" name="score">
                     <option value="" disabled selected>Score</option>
-                {% for score in score %}      
+                {% for score in score %}
+                    {% if score.score == review.score %}         
+                        <option value="{{score.score}}" selected>{{score.score}}</option>
+                     {% else %}
                         <option value="{{score.score}}">{{score.score}}</option>
-                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
                 </select>
 					</div>
 

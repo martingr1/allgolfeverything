@@ -50,8 +50,9 @@ def edit_review(review_id):
     all_categories = mongo.db.category.find()
     all_brands = mongo.db.brands.find()
     all_models = mongo.db.models.find()
-    return render_template('editreview.html', review = the_review, category = all_categories, brands = all_brands,
-    models = all_models)
+    all_scores = mongo.db.score.find()
+    return render_template('editreview.html', review=the_review, category =all_categories, brands =all_brands,
+    models =all_models, score=all_scores)
 
 @app.route('/update_review/<review_id>', methods=["POST"])
 def update_review(review_id):
