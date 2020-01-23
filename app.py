@@ -12,6 +12,16 @@ mongo = PyMongo(app)
 
 @app.route('/')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('get_reviews'))
+    return render_template('login.html', error=error)
+
 @app.route('/get_index')
 def get_index():
     return render_template("index.html")
@@ -57,7 +67,7 @@ def edit_review(review_id):
 @app.route('/update_review/<review_id>', methods=["POST"])
 def update_review(review_id):
     reviews = mongo.db.reviews
-    reviews.update( {'_id': ObjectId(review_id)},
+    reviews.update({'_id': ObjectId(review_id)},
     {
         'category_name':request.form.get('category_name'),
         'brand_name': request.form.get('brand_name'),
@@ -66,7 +76,12 @@ def update_review(review_id):
         'score':request.form.get('score')
     })
     return redirect(url_for('get_reviews'))
-    
+
+@app.route('/delete_review/<review_id>')
+def delete_review(review_id):
+    mongo.db.reviews.remove({'_id': ObjectId(review_id)})
+    return redirect(url_for('get_reviews'))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
