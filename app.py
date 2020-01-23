@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -7,20 +8,48 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = 'all_golf'
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI', 'mongodb://localhost')
+app.secret_key = os.urandom(24)
 
 mongo = PyMongo(app)
 
 @app.route('/')
+def index():
+    if 'username' in session:
+        return 'You are logged in'
+    return render_template("login.html")
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    error = None
+    users = mongo.db.users
+    login_user = users.find_one({'username' : request.form.get('username')})
+
+    if login_user:
+        if check_password_hash(request.form.get['password'], login_user['password']) == login_user['password']:
+            session['username'] = request.form.get('username')
+            return redirect(url_for('get_index'))
+    print(login_user)
+    
+    return 'Invalid username/password'
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('get_reviews'))
-    return render_template('login.html', error=error)
+        users = mongo.db.users
+        existing_user = users.find_one({'username': request.form.get('username')})
+
+        if existing_user is None:
+            securepass = generate_password_hash(request.form.get('password'))
+            users.insert_one({'username': request.form.get('username'), 'password': securepass})
+            session['username'] = request.form.get('username')
+            return redirect(url_for('index'))
+        
+        return 'That username already exists!'
+
+    return render_template('register.html')
+
+@app.route('/get_login')
+def get_login():
+    return render_template("login.html")
 
 @app.route('/get_index')
 def get_index():
@@ -86,3 +115,4 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+    
