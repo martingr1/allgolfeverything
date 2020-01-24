@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -12,40 +12,18 @@ app.secret_key = os.urandom(24)
 
 mongo = PyMongo(app)
 
-@app.route('/')
-def index():
-    if 'username' in session:
-        return 'You are logged in'
-    return render_template("login.html")
-
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET'])
 def login():
-    users = mongo.db.users
-    login_user = users.find_one({'username' : request.form.get('username')})
-
-    if login_user:
-        if check_password_hash(request.form.get['password'], login_user['password']) == login_user['password']:
-            session['username'] = request.form.get('username')
-            return redirect(url_for('get_index'))
-    print(login_user)
-    
-    return 'Invalid username/password'
-
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    if request.method == 'POST':
-        users = mongo.db.users
-        existing_user = users.find_one({'username': request.form.get('username')})
-
-        if existing_user is None:
-            securepass = generate_password_hash(request.form.get('password'))
-            users.insert_one({'username': request.form.get('username'), 'password': securepass})
-            session['username'] = request.form.get('username')
-            return redirect(url_for('index'))
-        
-        return 'That username already exists!'
-
-    return render_template('register.html')
+	# Check if user is not logged in already
+	if 'user' in session:
+		existing_user = mongo.db.users.find_one({"username":session['user']})
+		if existing_user:
+			# If so redirect user to his profile
+			flash("You are logged in already!")
+			return redirect(url_for('profile', user=user_in_db['username']))
+	else:
+		# Render the page for user to be able to log in
+		return render_template("login.html")
 
 @app.route('/get_login')
 def get_login():
