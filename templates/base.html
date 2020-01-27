@@ -24,6 +24,7 @@
 					<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
 					</li>
 					<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
+                    <li class=""><a href="{{url_for('logout')}}"><i class="material-icons">account_circle</i></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -31,16 +32,17 @@
 			<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
 			</li>
 			<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
+            <li class=""><a href="{{url_for('logout')}}"><i class="material-icons">account_circle</i></a></li>
 		</ul>
 	</header>
 	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	{% for message in messages %}
+	    {% if messages %}
+	        {% for message in messages %}
 	<div class="row">
 		{{message}}
 	</div>
-	{% endfor %}
-	{% endif %}
+	        {% endfor %}
+	    {% endif %}
 	{% endwith %}
 	{% block content %}
 

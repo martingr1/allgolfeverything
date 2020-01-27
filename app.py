@@ -59,6 +59,12 @@ def register():
         
     return render_template('register.html')
 
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    flash("You have been logged out")
+    return render_template("login.html")
+
 @app.route('/get_index')
 def get_index():
     return render_template("index.html")
