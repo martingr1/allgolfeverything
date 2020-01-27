@@ -4,27 +4,26 @@
 <head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-<style>
-body {
-	    background-color: #D3D3D3
-} 
-
-</style>
+	<style>
+		body {
+			background-color: #D3D3D3
+		}
+	</style>
 	<header>
 		<nav>
 			<div class="nav-wrapper navbar">
-				<a href="{{url_for('get_index')}}" class="brand-logo"><i class="material-icons">cloud</i>All Golf Everything</a>
+				<a href="{{url_for('get_index')}}" class="brand-logo"><i class="material-icons">cloud</i>All Golf
+					Everything</a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down">
 					<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
 					</li>
-					<li class=""><a
-							href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
+					<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -34,10 +33,20 @@ body {
 			<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
 		</ul>
 	</header>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for message in messages %}
+	<div class="row">
+		{{message}}
+	</div>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
 	{% block content %}
+
 	{% endblock %}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
             $('.collapsible').collapsible();

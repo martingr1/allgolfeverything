@@ -38,7 +38,7 @@ def user_auth():
 			return redirect(url_for('get_index'))
 		else:
 			flash("Wrong password or user name!")
-			return redirect(url_for('login'))
+			return redirect(url_for('get_login'))
 	else:
 		flash("You must be registered!")
 		return redirect(url_for('register'))
@@ -55,7 +55,7 @@ def register():
             session['username'] = request.form.get('username')
             return redirect(url_for('get_index'))
   
-        return 'That username already exists!'
+        flash("That username already exists!")
         
     return render_template('register.html')
 
