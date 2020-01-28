@@ -34,14 +34,14 @@ def user_auth():
 	if existing_user:
 		if check_password_hash(existing_user['password'], form['password']):
 			session['user'] = form['username']
-			flash("You were logged in!")
+			flash("You were logged in successfully!")
 			return redirect(url_for('get_index'))
 		else:
-			flash("Wrong password or user name!")
+			flash("Invalid credentials")
 			return redirect(url_for('get_login'))
 	else:
-		flash("You must be registered!")
-		return redirect(url_for('register'))
+		flash("You must be registered to access the platform!")
+		return redirect(url_for('get_login'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

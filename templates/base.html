@@ -3,7 +3,8 @@
 
 <head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -15,50 +16,36 @@
 		}
 	</style>
 	<header>
-		<nav>
-			<div class="nav-wrapper navbar">
-				<a href="{{url_for('get_index')}}" class="brand-logo"><i class="material-icons">cloud</i>All Golf
-					Everything</a>
-				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-				<ul class="right hide-on-med-and-down">
-					<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
-					</li>
-					<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
-                    <li class=""><a href="{{url_for('logout')}}"><i class="material-icons">account_circle</i></a></li>
-				</ul>
-			</div>
-		</nav>
-		<ul class="sidenav" id="mobile-demo">
-			<li class=""><a href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
-			</li>
-			<li class=""><a href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a></li>
-            <li class=""><a href="{{url_for('logout')}}"><i class="material-icons">account_circle</i></a></li>
-		</ul>
+
 	</header>
-	{% with messages = get_flashed_messages() %}
-	    {% if messages %}
-	        {% for message in messages %}
-	<div class="row">
-		{{message}}
+	<div class="container-fluid">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<strong>{{message}}</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+		</div>
 	</div>
-	        {% endfor %}
-	    {% endif %}
+	{% endfor %}
+	{% endif %}
 	{% endwith %}
 	{% block content %}
 
 	{% endblock %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-            $('.collapsible').collapsible();
-            $('select').formSelect();
-            $('#textarea2').val('');
-            M.textareaAutoResize($('#textarea'));
-            $('.sidenav').sidenav();
-            $('.modal').modal();
-             $('input#input_text, textarea#textarea').characterCounter();
-        });
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+	</script>
+	<script>
+		$('.alert').alert()
 	</script>
 </body>
 
