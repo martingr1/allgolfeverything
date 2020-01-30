@@ -12,10 +12,12 @@ app.secret_key = os.urandom(24)
 
 mongo = PyMongo(app)
 
+
 @app.route('/')
 @app.route('/get_login')
 def get_login():
     return render_template("login.html")
+
 
 @app.route('/login', methods=['GET'])
 def login():
@@ -25,39 +27,50 @@ def login():
             flash("You are logged in already!")
             return redirect(url_for('get_index.html'))
     else:
-        return render_template("login.html") 
+        return render_template("login.html")
+
 
 @app.route('/user_auth', methods=['POST'])
 def user_auth():
-	form = request.form.to_dict()
-	existing_user = mongo.db.users.find_one({"username": form['username']})
-	if existing_user:
-		if check_password_hash(existing_user['password'], form['password']):
-			session['user'] = form['username']
-			flash("You were logged in successfully!")
-			return redirect(url_for('get_index'))
-		else:
-			flash("Invalid credentials")
-			return redirect(url_for('get_login'))
-	else:
-		flash("You must be registered to access the platform!")
-		return redirect(url_for('get_login'))
+    form = request.form.to_dict()
+    existing_user = mongo.db.users.find_one({"username": form['username']})
+    if existing_user:
+        if check_password_hash(existing_user['password'], form['password']):
+            session['user'] = form['username']
+            flash("You were logged in successfully!")
+            return redirect(url_for('get_index'))
+        else:
+            flash("Invalid credentials supplied, please check your username or password")
+            return redirect(url_for('get_login'))
+    else:
+        flash("You must be registered to access the platform!")
+        return redirect(url_for('login'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
+    if 'user' in session:
+	    flash('You are already signed in!')
+	    return redirect(url_for('get_index'))
+
     if request.method == 'POST':
         users = mongo.db.users
-        existing_user = users.find_one({'username': request.form.get('username')})
+        existing_user = users.find_one(
+            {'username': request.form.get('username')})
 
         if existing_user is None:
             securepass = generate_password_hash(request.form.get('password'))
-            users.insert_one({'username': request.form.get('username'), 'password': securepass})
+            users.insert_one({'username': request.form.get(
+                'username'), 'password': securepass})
             session['username'] = request.form.get('username')
-            return redirect(url_for('get_index'))
-  
-        flash("That username already exists!")
-        
-    return render_template('register.html')
+            flash('Thank you for registering with All Golf Everything, please login')
+            return redirect(url_for('login'))
+        else:
+            flash("That username already exists!")
+            return redirect(url_for('register'))
+    
+    return render_template("register.html")
 
 @app.route("/logout")
 def logout():
@@ -68,6 +81,7 @@ def logout():
 @app.route('/get_index')
 def get_index():
     return render_template("index.html")
+
 
 @app.route('/add_review')
 def add_review():
@@ -132,7 +146,13 @@ def delete_review(review_id):
     mongo.db.reviews.remove({'_id': ObjectId(review_id)})
     return redirect(url_for('get_reviews'))
 
-
+@app.route('/search_reviews')
+def search_reviews():
+def search():
+    db_query = request.args['db_query']
+    results = mongo.db.reviews.find({'$text': {'$search': db_query }}).sort('_id', pymongo.ASCENDING)
+​
+    return render_template('search.html', results=results)
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
