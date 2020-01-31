@@ -43,6 +43,7 @@
 				<span>
       {{review.review_text}}</span>
 			</div>
+            <button><a href="{{url_for('upvoted', review_id=review._id)}} ">Upvote</a></button>
 			<div class="col s4">
 				<a class="btn-floating btn-large waves-effect waves-light yellow"
 					href="{{url_for('edit_review', review_id=review._id)}}">

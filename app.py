@@ -155,6 +155,16 @@ def search_reviews():
     results = mongo.db.reviews.find({"$text": {"$search": query}})
    return render_template("search.html", results=results)   
 
+@app.route('/upvoted/<review_id>')
+def upvoted(review_id):
+
+        mongo.db.reviews.find_one_and_update(
+            {'_id': ObjectId(review_id)},
+            {'$inc': {"upvote": 1}},
+            {"upsert": True}
+        )
+        return redirect(url_for('get_reviews')) 
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
