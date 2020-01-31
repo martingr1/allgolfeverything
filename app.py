@@ -51,8 +51,8 @@ def user_auth():
 def register():
 
     if 'user' in session:
-	    flash('You are already signed in!')
-	    return redirect(url_for('get_index'))
+        flash('You are already signed in!')
+        return redirect(url_for('get_index'))
 
     if request.method == 'POST':
         users = mongo.db.users
@@ -69,14 +69,16 @@ def register():
         else:
             flash("That username already exists!")
             return redirect(url_for('register'))
-    
+
     return render_template("register.html")
+
 
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     flash("You have been logged out")
     return render_template("login.html")
+
 
 @app.route('/get_index')
 def get_index():
@@ -140,19 +142,19 @@ def update_review(review_id):
     })
     return redirect(url_for('get_reviews'))
 
-
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
     mongo.db.reviews.remove({'_id': ObjectId(review_id)})
     return redirect(url_for('get_reviews'))
 
-@app.route('/search_reviews')
+@app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
-def search():
-    db_query = request.args['db_query']
-    results = mongo.db.reviews.find({'$text': {'$search': db_query }}).sort('_id', pymongo.ASCENDING)
-​
-    return render_template('search.html', results=results)
+    
+   if request.method =='POST':
+    query = request.form.get("search_query")
+    results = mongo.db.reviews.find({"$text": {"$search": query}})
+   return render_template("search.html", results=results)   
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

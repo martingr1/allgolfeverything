@@ -1,5 +1,6 @@
-{% extends 'base.html'%}
-{% block content %}
+{% extends "base.html" %}
+{% block content%}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<a class="navbar-brand" href="{{url_for('get_index')}}">All Golf Everything</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,39 +27,13 @@
 		</ul>
 	</div>
 </nav>
-<div class="container">
-	<div class="content-wrapper">
-		<div class="row wrapper-heading">
-			<h3>Read reviews</h3>
-		</div>
-		{% for review in reviews %}
-		<div class="row">
-			<strong>{{review.category_name}} - 
-      {{review.brand_name}}
-      {{review.model}}</strong>
-		</div>
-		<div class="row">
-			<div class="row col s8">
-				{{review.score}}
-				<span>
-      {{review.review_text}}</span>
-			</div>
-			<div class="col s4">
-				<a class="btn-floating btn-large waves-effect waves-light yellow"
-					href="{{url_for('edit_review', review_id=review._id)}}">
-					<i class="material-icons">add</i>
-				</a>
-				<a class="btn-floating btn-large waves-effect waves-light red"
-					href="{{url_for('delete_review', review_id=review._id)}}">
-					<i class="material-icons">delete</i>
-				</a>
-				<a class="btn-floating btn-large waves-effect waves-light green" href="">
-					<i class="material-icons">like</i>
-				</a>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-</div>
-
+{% if results %}
+    {% for r in results %}
+        <div>{{ r.category_name }}
+        {{ r.brand_name }}
+        {{ r.model_name }}
+        {{ r.review_text }}
+        {{ r.score }}</div>
+    {% endfor %}
+{% endif %}
 {% endblock %}
