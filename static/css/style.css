@@ -1,10 +1,5 @@
-body {
-    background-image: url("images/golf_background.jpg");
-    background-repeat: no-repeat;
-}
-
-.navbar {
-    color: blueviolet;
+.main-image {
+    background-image: url("/images/golf_background.jpg");
 }
 
 .icon-wrapper {
