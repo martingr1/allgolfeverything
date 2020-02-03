@@ -14,6 +14,11 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
+
+@app.route("/home")
+def get_home():
+    return render_template("home.html")
+    
 @app.route('/get_login')
 def get_login():
     return render_template("login.html")
@@ -71,7 +76,6 @@ def register():
             return redirect(url_for('register'))
 
     return render_template("register.html")
-
 
 @app.route("/logout")
 def logout():
