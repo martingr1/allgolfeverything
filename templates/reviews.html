@@ -42,6 +42,9 @@
 				{{review.score}}
 				<span>
       {{review.review_text}}</span>
+      <span>
+      {{review.upvote}} Upvotes(s)
+      </span>
 			</div>
             <button><a href="{{url_for('upvoted', review_id=review._id)}} ">Upvote</a></button>
 			<div class="col s4">
