@@ -18,7 +18,7 @@ mongo = PyMongo(app)
 @app.route("/home")
 def get_home():
     return render_template("home.html")
-    
+
 @app.route('/get_login')
 def get_login():
     return render_template("login.html")
@@ -30,7 +30,7 @@ def login():
         existing_user = mongo.db.users.find_one({"username": session['user']})
         if existing_user:
             flash("You are logged in already!")
-            return redirect(url_for('get_index.html'))
+            return redirect(url_for('get_index'))
     else:
         return render_template("login.html")
 

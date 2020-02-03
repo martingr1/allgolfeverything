@@ -3,22 +3,40 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<a class="navbar-brand" href="#">All Golf Everything</a>
 </nav>
+
 <div class="container">
-    <div class="row">
-        <div class="col s4">
-            <form method="POST" action="{{ url_for('register') }}">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn waves-effect waves-light">Register</button>
-            </form>
-            <br>
-        </div>
-    </div>
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Register</h3>
+			</div>
+			<div class="card-body">
+				<form action="{{ url_for('register') }}" method="POST">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="material-icons">account_circle</i></span>
+						</div>
+						<input type="text" name="username" class="form-control" placeholder="username">
+
+					</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="material-icons">vpn_key</i></span>
+							</div>
+							<input type="password" name = "password" class="form-control" placeholder="password">
+					</div>
+								<div class="form-group">
+									<input type="submit" value="Register" class="btn float-left login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Want to go back?<a href="{{ url_for('get_home') }}"> Click here to return</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 {% endblock %}

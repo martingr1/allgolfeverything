@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
 .main-image {
-    background-image: url("/images/golf_background.jpg");
+    background-image: url("static/images/golf_background.jpg");
 }
 
 .icon-wrapper {
@@ -15,10 +17,47 @@
     background-color: #FFFAFA;
     opacity: 0.9;
     border-radius: 2%;
+    padding: 2%;
 }
 
 .wrapper-heading {
     font-size: 50px;
     font-weight: 700;
     text-align: center;
+}
+
+.intro {
+    padding: 2%;
+}
+
+.login {
+    padding: 2%;
+}
+
+.links{
+color: black;
+}
+
+.links a{
+margin-left: 4px;
+}
+
+.login_btn{
+color: white;
+background-color: blue;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.card{
+opacity: 0.9;
+height: 370px;
+margin-top: 5%;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
 }
