@@ -26,6 +26,31 @@
 		</ul>
 	</div>
 </nav>
+
+<div class="container">
+	<div class="row">
+		<form action="{{url_for('filter_reviews')}}" method ="POST">
+			<div class="row">
+				<div class="input-field col s8">
+					<i class="material-icons prefix">subject</i>
+					<select id="category" name="category_name">
+                    <option value="" disabled selected>Choose Category</option>
+                {% for category in category %}      
+                        <option value="{{category.category_name}}">{{category.category_name}}</option>
+                    {% endfor %}
+                </select>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-light" type="submit">Filter<i class="material-icons right">send</i>
+                </button>
+                <a class="btn-floating btn-large waves-effect waves-light yellow"
+				href="{{url_for('get_reviews')}}">Reset Filters
+				<i class="material-icons">refresh</i>
+			</a>
+		</form>
+	</div>
+</div>
 {% for review in reviews %}
 <div class="container">
 	<div class="review-card">

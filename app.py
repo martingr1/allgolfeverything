@@ -12,12 +12,15 @@ app.secret_key = os.urandom(24)
 
 mongo = PyMongo(app)
 
+filters = ["category_name", "brand_name", "model_name"]
+sort_by = ["upvote"]
+
 
 @app.route('/')
-
 @app.route("/home")
 def get_home():
     return render_template("home.html")
+
 
 @app.route('/get_login')
 def get_login():
@@ -77,6 +80,7 @@ def register():
 
     return render_template("register.html")
 
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
@@ -93,11 +97,22 @@ def get_index():
 def add_review():
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
 
-
 @app.route('/get_reviews')
 def get_reviews():
-    return render_template("reviews.html", reviews=mongo.db.reviews.find())
+    return render_template("reviews.html", reviews=mongo.db.reviews.find(), category=mongo.db.category.find())
 
+@app.route('/filter_reviews', methods=['POST'])
+def filter_reviews():
+
+    filter_parameters = {}
+    if 'category_name' in request.form:
+        filter_parameters['category_name'] = request.form.get('category_name')
+        reviews = mongo.db.reviews.find(filter_parameters)
+        all_categories = mongo.db.category.find()
+        return render_template("reviews.html", reviews=reviews, category=all_categories)
+    else:
+        all_reviews = mongo.db.reviews.find()
+        return render_template("reviews.html", reviews=all_reviews)
 
 @app.route('/insert_review', methods=['POST'])
 def insert_review():
