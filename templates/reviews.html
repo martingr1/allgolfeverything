@@ -29,12 +29,12 @@
 {% for review in reviews %}
 <div class="container">
 	<div class="review-card">
-		<div class="row">Rating: {{review.score}}</div>
-		<div class="row">Category: {{review.category_name}}</div>
-		<div class="row">Brand: {{review.brand_name}}</div>
-		<div class="row">Model: {{review.model}}</div>
-		<div class="row">{{review.review_text}}</div>
-		<div class="row">{{review.upvote}} Like(s)</div>
+		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
+		<div class="row review-text">Category: {{review.category_name}}</div>
+		<div class="row review-text">Brand: {{review.brand_name}}</div>
+		<div class="row review-text">Model: {{review.model}}</div>
+		<div class="row review-text">{{review.review_text}}</div>
+		<div class="row review-text">{{review.upvote}} Like(s)</div>
 		<div class="col s4">
 			<a class="btn" href="{{url_for('upvoted', review_id=review._id)}} ">
 				<i class="material-icons">thumb_up</i>
@@ -46,9 +46,6 @@
 			<a class="btn-floating btn-large waves-effect waves-light red"
 				href="{{url_for('delete_review', review_id=review._id)}}">
 				<i class="material-icons">delete</i>
-			</a>
-			<a class="btn-floating btn-large waves-effect waves-light green" href="">
-				<i class="material-icons">like</i>
 			</a>
 		</div>
 	</div>

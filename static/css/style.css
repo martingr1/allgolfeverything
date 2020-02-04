@@ -63,12 +63,16 @@ background-color: rgba(0,0,0,0.5) !important;
 }
 
 .review-card{
-
 border-radius: 5%;
 opacity: 0.9;
 height: auto;
-margin-top: 5%;
-margin-bottom: auto;
+margin: 5%;
 width: auto;
 background-color: rgba(0,0,0,0.1) !important;
+}
+
+.review-text{
+    margin: auto;
+    padding: .5%;
+    font-size: 15px;
 }
