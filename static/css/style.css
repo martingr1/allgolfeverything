@@ -61,3 +61,14 @@ margin-bottom: auto;
 width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
+
+.review-card{
+
+border-radius: 5%;
+opacity: 0.9;
+height: auto;
+margin-top: 5%;
+margin-bottom: auto;
+width: auto;
+background-color: rgba(0,0,0,0.1) !important;
+}

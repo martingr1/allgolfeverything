@@ -26,43 +26,32 @@
 		</ul>
 	</div>
 </nav>
+{% for review in reviews %}
 <div class="container">
-	<div class="content-wrapper">
-		<div class="row wrapper-heading">
-			<h3>Read reviews</h3>
+	<div class="review-card">
+		<div class="row">Rating: {{review.score}}</div>
+		<div class="row">Category: {{review.category_name}}</div>
+		<div class="row">Brand: {{review.brand_name}}</div>
+		<div class="row">Model: {{review.model}}</div>
+		<div class="row">{{review.review_text}}</div>
+		<div class="row">{{review.upvote}} Like(s)</div>
+		<div class="col s4">
+			<a class="btn" href="{{url_for('upvoted', review_id=review._id)}} ">
+				<i class="material-icons">thumb_up</i>
+			</a>
+			<a class="btn-floating btn-large waves-effect waves-light yellow"
+				href="{{url_for('edit_review', review_id=review._id)}}">
+				<i class="material-icons">add</i>
+			</a>
+			<a class="btn-floating btn-large waves-effect waves-light red"
+				href="{{url_for('delete_review', review_id=review._id)}}">
+				<i class="material-icons">delete</i>
+			</a>
+			<a class="btn-floating btn-large waves-effect waves-light green" href="">
+				<i class="material-icons">like</i>
+			</a>
 		</div>
-		{% for review in reviews %}
-		<div class="row">
-			<strong>{{review.category_name}} - 
-      {{review.brand_name}}
-      {{review.model}}</strong>
-		</div>
-		<div class="row">
-			<div class="row col s8">
-				{{review.score}}
-				<span>
-      {{review.review_text}}</span>
-      <span>
-      {{review.upvote}} Upvotes(s)
-      </span>
-			</div>
-            <button><a href="{{url_for('upvoted', review_id=review._id)}} ">Upvote</a></button>
-			<div class="col s4">
-				<a class="btn-floating btn-large waves-effect waves-light yellow"
-					href="{{url_for('edit_review', review_id=review._id)}}">
-					<i class="material-icons">add</i>
-				</a>
-				<a class="btn-floating btn-large waves-effect waves-light red"
-					href="{{url_for('delete_review', review_id=review._id)}}">
-					<i class="material-icons">delete</i>
-				</a>
-				<a class="btn-floating btn-large waves-effect waves-light green" href="">
-					<i class="material-icons">like</i>
-				</a>
-			</div>
-		</div>
-		{% endfor %}
 	</div>
 </div>
-
+{% endfor %}
 {% endblock %}
