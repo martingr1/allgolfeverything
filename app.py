@@ -106,19 +106,25 @@ def filter_reviews():
     query = {}
     brands = request.form.get("brand_name")
     categories = request.form.get("category_name")
-
-    if 'category_name' and 'brand_name' in request.form:
-        query.update({"category_name": categories, "brand_name": brands})
-        reviews = mongo.db.reviews.find(query)
-        return render_template("reviews.html", reviews=reviews) 
+    
+    if 'brand_name' in request.form:
+        
+        if 'category_name' in request.form:
+            
+            query.update({"category_name": categories, "brand_name": brands})
+            reviews = mongo.db.reviews.find(query)
+            return render_template("reviews.html", reviews=reviews)
+        
+        else:
+            query.update({"brand_name": brands})
+            reviews = mongo.db.reviews.find(query)
+            return render_template("reviews.html", reviews=reviews)
+   
     elif 'category_name' in request.form:
         query.update({"category_name": categories})
         reviews = mongo.db.reviews.find(query)
         return render_template("reviews.html", reviews=reviews)
-    elif 'brand_name' in request.form:
-        query.update({"brand_name": brands})
-        reviews = mongo.db.reviews.find(query)
-        return render_template("reviews.html", reviews=reviews) 
+    
     else:
         all_reviews = mongo.db.reviews.find()
         return render_template("reviews.html", reviews=all_reviews)
