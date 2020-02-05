@@ -12,9 +12,6 @@ app.secret_key = os.urandom(24)
 
 mongo = PyMongo(app)
 
-filters = ["category_name", "brand_name", "model_name"]
-sort_by = ["upvote"]
-
 
 @app.route('/')
 @app.route("/home")
@@ -97,19 +94,31 @@ def get_index():
 def add_review():
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
 
+
 @app.route('/get_reviews')
 def get_reviews():
-    return render_template("reviews.html", reviews=mongo.db.reviews.find(), category=mongo.db.category.find())
+    return render_template("reviews.html", reviews=mongo.db.reviews.find(), category=mongo.db.category.find(), brands=mongo.db.brands.find())
+
 
 @app.route('/filter_reviews', methods=['POST'])
 def filter_reviews():
 
-    filter_parameters = {}
-    if 'category_name' in request.form:
-        filter_parameters['category_name'] = request.form.get('category_name')
-        reviews = mongo.db.reviews.find(filter_parameters)
-        all_categories = mongo.db.category.find()
-        return render_template("reviews.html", reviews=reviews, category=all_categories)
+    query = {}
+    brands = request.form.get("brand_name")
+    categories = request.form.get("category_name")
+
+    if 'category_name' and 'brand_name' in request.form:
+        query.update({"category_name": categories, "brand_name": brands})
+        reviews = mongo.db.reviews.find(query)
+        return render_template("reviews.html", reviews=reviews) 
+    elif 'category_name' in request.form:
+        query.update({"category_name": categories})
+        reviews = mongo.db.reviews.find(query)
+        return render_template("reviews.html", reviews=reviews)
+    elif 'brand_name' in request.form:
+        query.update({"brand_name": brands})
+        reviews = mongo.db.reviews.find(query)
+        return render_template("reviews.html", reviews=reviews) 
     else:
         all_reviews = mongo.db.reviews.find()
         return render_template("reviews.html", reviews=all_reviews)
@@ -161,28 +170,32 @@ def update_review(review_id):
     })
     return redirect(url_for('get_reviews'))
 
+
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
     mongo.db.reviews.remove({'_id': ObjectId(review_id)})
     return redirect(url_for('get_reviews'))
 
+
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
-    
-   if request.method =='POST':
-    query = request.form.get("search_query")
-    results = mongo.db.reviews.find({"$text": {"$search": query}})
-   return render_template("search.html", results=results)   
+
+    if request.method == 'POST':
+        query = request.form.get("search_query")
+        results = mongo.db.reviews.find({"$text": {"$search": query}})
+    return render_template("search.html", results=results)
+
 
 @app.route('/upvoted/<review_id>')
 def upvoted(review_id):
 
-        mongo.db.reviews.find_one_and_update(
-            {'_id': ObjectId(review_id)},
-            {'$inc': {"upvote": 1}},
-            {"upsert": True}
-        )
-        return redirect(url_for('get_reviews')) 
+    mongo.db.reviews.find_one_and_update(
+        {'_id': ObjectId(review_id)},
+        {'$inc': {"upvote": 1}},
+        {"upsert": True}
+    )
+    return redirect(url_for('get_reviews'))
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

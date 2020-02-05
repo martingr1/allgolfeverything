@@ -33,10 +33,19 @@
 			<div class="row">
 				<div class="input-field col s8">
 					<i class="material-icons prefix">subject</i>
-					<select id="category" name="category_name">
+					<select id="categories" name="category_name">
                     <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
+                    {% endfor %}
+                </select>
+				</div>
+                <div class="input-field col s8">
+					<i class="material-icons prefix">subject</i>
+					<select id="brands" name="brand_name">
+                    <option value="" disabled selected>Choose Brand</option>
+                {% for brands in brands %}      
+                        <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
                 </select>
 				</div>
