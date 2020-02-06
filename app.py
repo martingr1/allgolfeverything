@@ -138,6 +138,25 @@ def insert_review():
 
 @app.route('/insert_brand', methods=['POST'])
 def insert_brand():
+    
+     if 'user' in session:
+        
+        if request.method == 'POST':
+            brands = mongo.db.brands
+            existing_brand = brands.find_one(
+            {'brand_name': request.form.get('brand_name')})
+            flash("Brand already exists in database, please select from dropdown.")
+            return redirect(url_for('add_review'))
+            
+            if existing_brand is None:
+                model_doc = {'model_name': request.form.get('model_name')}
+                models.insert_one(model_doc)
+                flash("Model successfully added, please continue with your review.")
+                return redirect(url_for('add_review'))
+            
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
     brands = mongo.db.brands
     brand_doc = {'brand_name': request.form.get('brand_name')}
     brands.insert_one(brand_doc)
@@ -146,11 +165,25 @@ def insert_brand():
 
 @app.route('/insert_model', methods=['POST'])
 def insert_model():
-    models = mongo.db.models
-    model_doc = {'model_name': request.form.get('model_name')}
-    models.insert_one(model_doc)
-    return redirect(url_for('add_review'))
 
+    if 'user' in session:
+        
+        if request.method == 'POST':
+            models = mongo.db.models
+            existing_model = models.find_one(
+            {'model_name': request.form.get('model_name')})
+            flash("Model already exists in database, please select from dropdown.")
+            return redirect(url_for('add_review'))
+
+            if existing_model is None:
+                model_doc = {'model_name': request.form.get('model_name')}
+                models.insert_one(model_doc)
+                flash("Model successfully added, please continue with your review.")
+                return redirect(url_for('add_review'))
+            
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
 
 @app.route('/edit_review/<review_id>')
 def edit_review(review_id):

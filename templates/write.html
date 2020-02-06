@@ -25,6 +25,19 @@
 		</ul>
 	</div>
 </nav>
+<section class="main">
+	<div class="jumbotron main-image">
+		<div class="container">
+			<h1 class="display-4">Contribute</h1>
+			<p class="lead">Write your review for the community below!</p>
+			<hr class="my-4">
+			<p>Choose your category, brand, model and then write your review. Don't forget to add an image link so we
+				can see
+				for ourselves!
+			</p>
+		</div>
+	</div>
+</section>
 
 <form>
 	<div class="container">
@@ -47,7 +60,7 @@
     </select>
 			<div class="col s4">
 				<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#brandmodal">
-					<i class="material-icons">add</i>
+					<i class="material-icons">add_circle_outline</i>
 				</a>
 			</div>
 		</div>
@@ -61,8 +74,9 @@
                 </select>
 		</div>
 		<div class="col s4">
-			<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#brandmodal">
-				<i class="material-icons">add</i>
+			<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" data-toggle="modal"
+				href="#modelmodal">
+				<i class="material-icons">add_circle_outline</i>
 			</a>
 		</div>
 		<div class="form-group">
@@ -78,7 +92,7 @@
 			<label for="exampleFormControlTextarea1">Write your review here</label>
 			<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
 		</div>
-		<label for="basic-url">Your vanity URL</label>
+		<label for="basic-url">Your Image URL</label>
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon3">https://</span>
@@ -114,7 +128,7 @@
 	</div>
 </div>
 
-<div id="modelmodal" class="modal">
+<div id="" class="modal">
 	<div class="modal-content">
 		<h4>Add new model</h4>
 		<div class="row">
@@ -132,6 +146,38 @@
         </button>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modelmodal" tabindex="-1" role="dialog" aria-labelledby="modelmodal" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Add a new model to database</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+			</div>
+			<div class="modal-body">
+				<form action="{{ url_for('insert_model') }}" method="POST" class="col-sm12">
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">poll</i>
+							<input id="model_name" name="model_name" type="text" class="validate" required>
+							<label for="model_name"></label>
+						</div>
+					</div>
+					<div class="row">
+						<button class="btn btn-primary" type="submit">Add Model
+            <i class="material-icons right">send</i>
+        </button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="" data-dismiss="modal">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>
