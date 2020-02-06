@@ -1,95 +1,96 @@
 {% extends 'base.html' %} {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	<a class="navbar-brand">All Golf Everything</a>
+	<a class="navbar-brand" href="{{url_for('get_index')}}">All Golf Everything</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="{{url_for('get_reviews')}}"><i class="material-icons">art_track</i></a>
+				<a class="nav-link" href="{{url_for('get_reviews')}}">Reviews<span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="{{url_for('add_review')}}"><i class="material-icons">border_color</i></a>
+				<a class="nav-link"
+					href="{{url_for('add_review')}}">Contribute<span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle mr-sm-2" href="#" id="navbarDropdown" role="button"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Account
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+				</div>
 			</li>
 		</ul>
+	</div>
 </nav>
 
-<div class="container">
-	<div class="content-wrapper">
-		<div class="row wrapper-heading">
-			<p class="">Write your review</p>
-		</div>
-		<div class="row">
-			<form action="{{url_for('insert_review')}}" method="POST" class="col s12">
-				<div class="row">
-					<div class="input-field col s8">
-						<i class="material-icons prefix">subject</i>
-						<select id="category" name="category_name">
-                    <option value="" disabled selected>Choose Category</option>
+<form>
+	<div class="container">
+		<div class="form-group">
+			<label for="Choose Category"></label>
+			<select class = "form-control" id="category" name="category_name">
+       <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                     {% endfor %}
-                </select>
-					</div>
-
-					<div class="input-field col s8">
-						<i class="material-icons prefix">subject</i>
-						<select id="brand" name="brand_name">
-                    <option value="" disabled selected>Choose Brand</option>
+    </select>
+		</div>
+		<div class="form-group">
+			<label for="Choose Brand"></label>
+			<select class = "form-control" id="brand" name="brand_name">
+        <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
-                </select>
-					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-							href="#brandmodal">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-
-					<div class="input-field col s8">
-						<i class="material-icons prefix">subject</i>
-						<select id="model" name="model_name">
-                    <option value="" disabled selected>Choose Model</option>
+    </select>
+			<div class="col s4">
+				<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#brandmodal">
+					<i class="material-icons">add</i>
+				</a>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="Choose Model"></label>
+			<select class = "form-control" id="model" name="model_name">
+        <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
                         <option value="{{models.model_name}}">{{models.model_name}}</option>
                     {% endfor %}
                 </select>
-					</div>
-					<div class="col s4">
-						<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger"
-							href="#modelmodal">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-
-					<div class="input-field col s8">
-						<i class="material-icons prefix">border_color</i>
-						<textarea name="review_text" type="text" id="review" class="materialize-textarea"></textarea>
-						<label for="review_text">Write your review here</label>
-					</div>
-
-					<div class="input-field col s8">
-						<i class="material-icons prefix">star</i>
-						<select id="score" name="score">
-                    <option value="" disabled selected>Score</option>
+		</div>
+		<div class="col s4">
+			<a class="btn-floating btn-large waves-effect waves-light teal modal-trigger" href="#brandmodal">
+				<i class="material-icons">add</i>
+			</a>
+		</div>
+		<div class="form-group">
+			<label for="Choose Model"></label>
+			<select class = "form-control" id="score" name="score">
+        <option value="" disabled selected>Score</option>
                 {% for score in score %}      
                         <option value="{{score.score}}">{{score.score}}</option>
                     {% endfor %}
                 </select>
-					</div>
-
-					<div class="col s8">
-						<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
-                </button>
-					</div>
-				</div>
-			</form>
 		</div>
-	</div>
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Write your review here</label>
+			<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+		</div>
+		<label for="basic-url">Your vanity URL</label>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon3">https://</span>
+			</div>
+			<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 </div>
+			<div class="col-sm8">
+				<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
+                </button>
+			</div>
+		</div>
+</form>
 
 <div id="brandmodal" class="modal">
 	<div class="modal-content">
