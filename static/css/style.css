@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-.main-image {
-    background-image: url("static/images/golf_background.jpg");
+body {
+    background-image: url("images/golf_background.jpg");
 }
 
 .icon-wrapper {
@@ -64,15 +64,23 @@ background-color: rgba(0,0,0,0.5) !important;
 
 .review-card{
 border-radius: 5%;
-opacity: 0.9;
 height: auto;
 margin: 5%;
 width: auto;
-background-color: rgba(0,0,0,0.1) !important;
+background-color: rgba(0,0,0,0.5) !important;
+color: whitesmoke;
 }
 
 .review-text{
     margin: auto;
     padding: .5%;
     font-size: 15px;
+}
+
+.default-image{
+    height: 125px;
+    width: 100px;
+    border-radius: 15%;
+    margin: 1%;
+    padding: 1%;
 }

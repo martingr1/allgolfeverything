@@ -39,70 +39,70 @@
 	</div>
 </section>
 
-<form>
+<form action="/insert_review" method="POST">
 	<div class="container">
-		<div class="form-group">
-			<label for="Choose Category"></label>
-			<select class = "form-control" id="category" name="category_name">
+		<div class="review-card">
+			<div class="form-group">
+				<label for="Choose Category"></label>
+				<select class = "form-control" id="category" name="category_name">
        <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                     {% endfor %}
     </select>
-		</div>
-		<div class="form-group">
-			<label for="Choose Brand"></label>
-			<select class = "form-control" id="brand" name="brand_name">
+			</div>
+			<div class="form-group">
+				<label for="Choose Brand"></label>
+				<select class = "form-control" id="brand" name="brand_name">
         <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
     </select>
-			<div class="col s4">
-			<a class="button" data-toggle="modal"
-				href="#brandmodal">
-				<i class="material-icons">add_circle_outline</i>
-			</a>
-		</div>
-		</div>
-		<div class="form-group">
-			<label for="Choose Model"></label>
-			<select class = "form-control" id="model" name="model_name">
+				<div class="col s4">
+					<a class="button" data-toggle="modal" href="#brandmodal">
+						<i class="material-icons">add_circle_outline</i>
+					</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Choose Model"></label>
+				<select class = "form-control" id="model" name="model_name">
         <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
                         <option value="{{models.model_name}}">{{models.model_name}}</option>
                     {% endfor %}
                 </select>
-		</div>
-		<div class="col s4">
-			<a class="button" data-toggle="modal"
-				href="#modelmodal">
-				<i class="material-icons">add_circle_outline</i>
-			</a>
-		</div>
-		<div class="form-group">
-			<label for="Choose Model"></label>
-			<select class = "form-control" id="score" name="score">
+			</div>
+			<div class="col s4">
+				<a class="button" data-toggle="modal" href="#modelmodal">
+					<i class="material-icons">add_circle_outline</i>
+				</a>
+			</div>
+			<div class="form-group">
+				<label for="Choose Model"></label>
+				<select class = "form-control" id="score" name="score">
         <option value="" disabled selected>Score</option>
                 {% for score in score %}      
                         <option value="{{score.score}}">{{score.score}}</option>
                     {% endfor %}
                 </select>
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlTextarea1">Write your review here</label>
-			<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-		</div>
-		<label for="basic-url">Your Image URL</label>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon3">https://</span>
 			</div>
-			<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1">Write your review here</label>
+				<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+			</div>
+			<label for="basic-url">Your Image URL</label>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon3">https://</span>
+				</div>
+				<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 </div>
-			<div class="col-sm8">
-				<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
+				<div class="col-sm8">
+					<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
                 </button>
+				</div>
 			</div>
 		</div>
 </form>

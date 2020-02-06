@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session, flash
+from flask import Flask, render_template, redirect, request, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -97,7 +97,8 @@ def add_review():
 
 @app.route('/get_reviews')
 def get_reviews():
-    return render_template("reviews.html", reviews=mongo.db.reviews.find(), category=mongo.db.category.find(), brands=mongo.db.brands.find())
+    reviews = mongo.db.reviews.find().sort("_id", -1).limit(10)
+    return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find(), brands=mongo.db.brands.find())
 
 
 @app.route('/filter_reviews', methods=['POST'])
@@ -135,6 +136,7 @@ def insert_review():
     if 'user' in session:
         reviews = mongo.db.reviews
         reviews.insert_one(request.form.to_dict())
+        flash("Review submitted, thank you.")
         return redirect(url_for('get_reviews'))
 
     else:

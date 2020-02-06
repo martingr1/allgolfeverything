@@ -26,10 +26,22 @@
 		</ul>
 	</div>
 </nav>
+<section class="main">
+	<div class="jumbotron main-image">
+		<div class="container">
+			<h1 class="display-4">Reviews</h1>
+			<p class="lead">Welcome to the reviews section of All Golf.</p>
+			<hr class="my-4">
+			<p>The top 10 newest results are shown by default, or you can filter results by either category, brand or
+				both.
+			</p>
+		</div>
+	</div>
+</section>
 
 <div class="container">
-	<div class="row">
-		<form action="{{url_for('filter_reviews')}}" method ="POST">
+	<div class="review-card col-sm-12">
+		<form action="{{url_for('filter_reviews')}}" method="POST">
 			<div class="row">
 				<div class="input-field col s8">
 					<i class="material-icons prefix">subject</i>
@@ -40,7 +52,7 @@
                     {% endfor %}
                 </select>
 				</div>
-                <div class="input-field col s8">
+				<div class="input-field col s8">
 					<i class="material-icons prefix">subject</i>
 					<select id="brands" name="brand_name">
                     <option value="" disabled selected>Choose Brand</option>
@@ -49,21 +61,25 @@
                     {% endfor %}
                 </select>
 				</div>
-			</div>
-			<div class="row">
 				<button class="btn waves-effect waves-light" type="submit">Filter<i class="material-icons right">send</i>
                 </button>
-                <a class="btn-floating btn-large waves-effect waves-light yellow"
-				href="{{url_for('get_reviews')}}">Reset Filters
-				<i class="material-icons">refresh</i>
-			</a>
+				<a class="btn-floating btn-large waves-effect waves-light yellow"
+					href="{{url_for('get_reviews')}}">Reset Filters
+					<i class="material-icons">refresh</i>
+				</a>
+			</div>
 		</form>
 	</div>
 </div>
 {% for review in reviews %}
 <div class="container">
-	<div class="review-card">
+	<div class="review-card col-sm-12">
+		<img class= "default-image" src="static/images/golf_image.jpg" alt="">
 		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
+		<div class="row review-text"><a class="btn-floating btn-large waves-effect waves-light yellow"
+				href="{{review.image_url}}">Click for image
+				<i class="material-icons">refresh</i>
+			</a></div>
 		<div class="row review-text">Category: {{review.category_name}}</div>
 		<div class="row review-text">Brand: {{review.brand_name}}</div>
 		<div class="row review-text">Model: {{review.model}}</div>
