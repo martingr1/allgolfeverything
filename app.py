@@ -14,10 +14,10 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-@app.route("/home")
-def get_home():
-    return render_template("home.html")
 
+@app.route("/get_index")
+def get_index():
+    return render_template("index.html")
 
 @app.route('/get_login')
 def get_login():
@@ -43,13 +43,13 @@ def user_auth():
         if check_password_hash(existing_user['password'], form['password']):
             session['user'] = form['username']
             flash("You were logged in successfully!")
-            return redirect(url_for('get_index'))
+            return redirect(url_for('get_reviews'))
         else:
             flash("Invalid credentials supplied, please check your username or password")
             return redirect(url_for('get_login'))
     else:
         flash("You must be registered to access the platform!")
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -84,12 +84,6 @@ def logout():
     flash("You have been logged out")
     return render_template("login.html")
 
-
-@app.route('/get_index')
-def get_index():
-    return render_template("index.html")
-
-
 @app.route('/add_review')
 def add_review():
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
@@ -97,14 +91,20 @@ def add_review():
 
 @app.route('/get_reviews')
 def get_reviews():
-    reviews = mongo.db.reviews.find().sort("_id", -1).limit(10)
-    return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find(), brands=mongo.db.brands.find())
-
+    
+    if 'user' in session:
+        reviews = mongo.db.reviews.find().sort("_id", -1).limit(10)
+        return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find(), brands=mongo.db.brands.find())
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
 
 @app.route('/filter_reviews', methods=['POST'])
 def filter_reviews():
 
     query = {}
+    all_categories = mongo.db.category.find()
+    all_brands = mongo.db.brands.find()
     brands = request.form.get("brand_name")
     categories = request.form.get("category_name")
     
@@ -114,21 +114,21 @@ def filter_reviews():
             
             query.update({"category_name": categories, "brand_name": brands})
             reviews = mongo.db.reviews.find(query)
-            return render_template("reviews.html", reviews=reviews)
+            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
         
         else:
             query.update({"brand_name": brands})
             reviews = mongo.db.reviews.find(query)
-            return render_template("reviews.html", reviews=reviews)
+            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
    
     elif 'category_name' in request.form:
         query.update({"category_name": categories})
         reviews = mongo.db.reviews.find(query)
-        return render_template("reviews.html", reviews=reviews)
+        return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
     
     else:
         all_reviews = mongo.db.reviews.find()
-        return render_template("reviews.html", reviews=all_reviews)
+        return render_template("reviews.html", reviews=all_reviews, brands=all_brands, category=all_categories)
 
 @app.route('/insert_review', methods=['POST'])
 def insert_review():
@@ -195,8 +195,9 @@ def edit_review(review_id):
     all_categories = mongo.db.category.find()
     all_brands = mongo.db.brands.find()
     all_models = mongo.db.models.find()
+    all_text = mongo.db.reviews.review_text.find()
     all_scores = mongo.db.score.find()
-    return render_template('editreview.html', review=the_review, category=all_categories, brands=all_brands,
+    return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
                            models=all_models, score=all_scores)
 
 
@@ -211,6 +212,7 @@ def update_review(review_id):
         'review_text': request.form.get('review_text'),
         'score': request.form.get('score')
     })
+    flash("Review successfully edited.")
     return redirect(url_for('get_reviews'))
 
 

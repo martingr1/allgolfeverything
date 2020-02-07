@@ -1,30 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	<a class="navbar-brand" href="{{url_for('get_index')}}">All Golf Everything</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="{{url_for('get_reviews')}}">Reviews<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link"
-					href="{{url_for('add_review')}}">Contribute<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle mr-sm-2" href="#" id="navbarDropdown" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Account
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
-				</div>
-			</li>
-		</ul>
-	</div>
-</nav>
 <section class="main">
 	<div class="jumbotron main-image">
 		<div class="container">
@@ -95,7 +69,7 @@
 			<label for="basic-url">Your Image URL</label>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon3">https://</span>
+					<span class="input-group-text" id="basic-addon3">URL</span>
 				</div>
 				<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 </div>

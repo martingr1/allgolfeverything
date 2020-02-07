@@ -42,13 +42,13 @@ color: black;
 margin-left: 4px;
 }
 
-.login_btn{
+.btn{
 color: white;
 background-color: blue;
 width: 100px;
 }
 
-.login_btn:hover{
+.btn:hover{
 color: black;
 background-color: white;
 }
@@ -83,4 +83,11 @@ color: whitesmoke;
     border-radius: 15%;
     margin: 1%;
     padding: 1%;
+}
+
+.edit-text{
+
+    height: 50px;
+    width: auto;
+
 }
