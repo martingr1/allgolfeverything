@@ -16,7 +16,7 @@
 <form action="/insert_review" method="POST">
 	<div class="container">
 		<div class="review-card">
-			<div class="form-group">
+			<div class="form-group col-md-8">
 				<label for="Choose Category"></label>
 				<select class = "form-control" id="category" name="category_name">
        <option value="" disabled selected>Choose Category</option>
@@ -25,7 +25,7 @@
                     {% endfor %}
     </select>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-md-8">
 				<label for="Choose Brand"></label>
 				<select class = "form-control" id="brand" name="brand_name">
         <option value="" disabled selected>Choose Brand</option>
@@ -39,7 +39,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-md-8">
 				<label for="Choose Model"></label>
 				<select class = "form-control" id="model" name="model_name">
         <option value="" disabled selected>Choose Model</option>
@@ -53,7 +53,7 @@
 					<i class="material-icons">add_circle_outline</i>
 				</a>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-md-8">
 				<label for="Choose Model"></label>
 				<select class = "form-control" id="score" name="score">
         <option value="" disabled selected>Score</option>
@@ -62,7 +62,7 @@
                     {% endfor %}
                 </select>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-md-8">
 				<label for="exampleFormControlTextarea1">Write your review here</label>
 				<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
 			</div>

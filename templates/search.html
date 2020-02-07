@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content%}
 {% if results %}
-    {% for r in results %}
-        <div>{{ r.category_name }}
-        {{ r.brand_name }}
-        {{ r.model_name }}
-        {{ r.review_text }}
-        {{ r.score }}</div>
-    {% endfor %}
-{% endif %}
-{% endblock %}
+{% for r in results %}
+<div class="container">
+	<div class="review-card col-sm-12">
+		<img class= "default-image" src="static/images/golf_image.jpg" alt="golf image">
+		<div class="row review-text">Rating (out of 5): {{r.score}}</div>
+        <div class="row review-text"><a class="btn-floating btn-large waves-effect waves-light yellow"
+				href="{{r.image_url}}">Click for image
+				<i class="material-icons">refresh</i>
+			</a></div>
+		<div class="row review-text">Category: {{r.category_name}}</div>
+		<div class="row review-text">Brand: {{r.brand_name}}</div>
+		<div class="row review-text">Model: {{r.model_name}}</div>
+		<div class="row review-text">{{r.review_text}}</div>
+		<div class="row review-text">{{r.upvote}} Like(s)</div>
+		{% endfor %}
+		{% endif %}
+		{% endblock %}
+	</div>
+</div>

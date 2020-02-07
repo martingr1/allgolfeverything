@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session, flash, jsonify
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -224,7 +224,6 @@ def delete_review(review_id):
 
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
-
     if request.method == 'POST':
         query = request.form.get("search_query")
         results = mongo.db.reviews.find({"$text": {"$search": query}})

@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-body {
-    background-image: url("images/golf_background.jpg");
-}
-
 .icon-wrapper {
     text-align: center;
 }
@@ -11,13 +7,6 @@ body {
     font-size: 100px;
     padding: 25% 50px 10px;
     color: blue;
-}
-
-.content-wrapper {
-    background-color: #FFFAFA;
-    opacity: 0.9;
-    border-radius: 2%;
-    padding: 2%;
 }
 
 .wrapper-heading {
@@ -28,6 +17,7 @@ body {
 
 .intro {
     padding: 2%;
+    color: #C0C0C0;
 }
 
 .login {
@@ -44,13 +34,15 @@ margin-left: 4px;
 
 .btn{
 color: white;
-background-color: blue;
-width: 100px;
+background-color:#228B22;
+border-color: #228B22;
+width: 150px;
 }
 
 .btn:hover{
 color: black;
 background-color: white;
+border-color: #228B22;
 }
 
 .card{
@@ -85,9 +77,15 @@ color: whitesmoke;
     padding: 1%;
 }
 
-.edit-text{
-
+.edit-text {
     height: 50px;
     width: auto;
+}
 
+.card-header {
+    color: whitesmoke;
+}
+
+.card-footer {
+    color: whitesmoke;
 }

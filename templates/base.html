@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -7,7 +6,7 @@
 	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
 	<a class="navbar-brand" href="{{url_for('get_index')}}">All Golf Everything</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -27,10 +26,15 @@
 					Account
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+                    <a class="dropdown-item" href="{{url_for('login')}}">Log In</a>
+					<a class="dropdown-item" href="{{url_for('logout')}}">Log Out</a>
 				</div>
 			</li>
 		</ul>
+        <form action ="/search_reviews" class="form-inline my-2 my-lg-0" method="POST">
+				<input class="form-control mr-sm-2" name="search_query" type="search" placeholder="Quick search reviews" aria-label="Search" required>
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
 	</div>
 </nav>
 <body>
