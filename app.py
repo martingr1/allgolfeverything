@@ -94,7 +94,7 @@ def get_reviews():
     
     if 'user' in session:
         reviews = mongo.db.reviews.find().sort("_id", -1).limit(10)
-        return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find(), brands=mongo.db.brands.find())
+        return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find().sort("_id", -1), brands=mongo.db.brands.find())
     else:
         flash("You must be logged in to do this!")
         return render_template("login.html")
@@ -196,21 +196,26 @@ def edit_review(review_id):
     all_brands = mongo.db.brands.find()
     all_models = mongo.db.models.find()
     all_text = mongo.db.reviews.review_text.find()
+    all_images = mongo.db.reviews.image_url.find()
     all_scores = mongo.db.score.find()
+    all_upvote = mongo.db.reviews.upvote.find()
     return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
-                           models=all_models, score=all_scores)
+                           models=all_models, score=all_scores, image=all_images, upvote=all_upvote)
 
 
 @app.route('/update_review/<review_id>', methods=["POST"])
 def update_review(review_id):
+
     reviews = mongo.db.reviews
     reviews.update({'_id': ObjectId(review_id)},
                    {
         'category_name': request.form.get('category_name'),
+        'image_url': request.form.get('image_url'),
         'brand_name': request.form.get('brand_name'),
         'model_name': request.form.get('model_name'),
         'review_text': request.form.get('review_text'),
-        'score': request.form.get('score')
+        'score': request.form.get('score'),
+        'upvote': int(request.form.get('upvote'))
     })
     flash("Review successfully edited.")
     return redirect(url_for('get_reviews'))
