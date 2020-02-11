@@ -57,9 +57,13 @@
 		<img class= "default-image" src="static/images/golf_image.jpg" alt="default image">
 		<div class="row review-text"><strong>{{review.review_title}}</strong></div>
 		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
-		<div class="row review-text"><a class="btn-floating btn-large waves-effect waves-light yellow"
-				href="{{review.image_url}}" target="_blank">Click for image
-				<i class="material-icons">refresh</i>
+		<div class="row review-text"><a class="" data-toggle="tooltip" data-placement="top" title="Click for image"
+				href="{{review.image_url}}" target="_blank">
+				<i class="material-icons">camera_alt</i>
+			</a>
+            <a class="" data-toggle="tooltip" data-placement="top" title="Click to see this item on American Golf"
+				href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
+				<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
 			</a></div>
 		<div class="row review-text"><strong>Category: </strong> {{review.category_name}}</div>
 		<div class="row review-text"><strong>Brand: </strong> {{review.brand_name}}</div>

@@ -93,7 +93,7 @@ def add_review():
 def get_reviews():
     
     if 'user' in session:
-        reviews = mongo.db.reviews.find().sort("_id", -1).limit(10)
+        reviews = mongo.db.reviews.find().sort("_id", -1).limit(5)
         return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find().sort("_id", -1), brands=mongo.db.brands.find())
     else:
         flash("You must be logged in to do this!")

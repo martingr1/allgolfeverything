@@ -119,3 +119,9 @@ color: whitesmoke;
     padding-right: 5px;
     margin-bottom: 10px;
 }
+
+.affiliate-img {
+    height: 30px;
+    width: 80px;
+    padding: 2px;
+}
