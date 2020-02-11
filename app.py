@@ -232,7 +232,7 @@ def search_reviews():
     if request.method == 'POST':
         query = request.form.get("search_query")
         results = mongo.db.reviews.find({"$text": {"$search": query}})
-    return render_template("search.html", results=results)
+    return render_template("search.html", results=results, review=mongo.db.reviews.find())
 
 
 @app.route('/upvoted/<review_id>')

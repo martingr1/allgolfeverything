@@ -17,7 +17,14 @@
 
 .intro {
     padding: 2%;
-    color: #C0C0C0;
+    margin: 10px;
+    color: #2f4f4f;
+}
+
+.intro-light {
+    color: #CDCDCD;
+    margin: 5px;
+    padding: 2px;
 }
 
 .login {
@@ -37,6 +44,7 @@ color: white;
 background-color:#228B22;
 border-color: #228B22;
 width: 150px;
+padding: 5px;
 }
 
 .btn:hover{
@@ -57,8 +65,8 @@ background-color: rgba(0,0,0,0.5) !important;
 .review-card{
 border-radius: 2%;
 height: auto;
-margin: 5%;
 width: auto;
+margin: 5%;
 background-color: rgba(0,0,0,0.5) !important;
 color: whitesmoke;
 }
@@ -93,6 +101,21 @@ color: whitesmoke;
 .rev-btn {
     height: 42px;
     width: 50px;
-    padding: 1%;
+    padding: 10px%;
     margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.filters {
+    max-width: 300px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0 auto;
+}
+
+.filters-btn {
+    max-width: 300px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
 }
