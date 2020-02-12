@@ -13,14 +13,14 @@
 	</div>
 </section>
 
-<form action="/insert_review" method="POST">
-	<div class="container">
+<div class="container">
+	<form action="/insert_review" method="POST">
 		<div class="review-card">
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-12 write-filters">
 				<label for="exampleFormControlTextarea1">Give your review a title</label>
 				<textarea name="review_title" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 write-filters">
 				<label for="Choose Category"></label>
 				<select class = "form-control" id="category" name="category_name">
        <option value="" disabled selected>Choose Category</option>
@@ -29,21 +29,18 @@
                     {% endfor %}
     </select>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 write-filters">
 				<label for="Choose Brand"></label>
 				<select class = "form-control" id="brand" name="brand_name">
         <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
-    </select>
-				<div class="col s4">
-					<a class="button" data-toggle="modal" href="#brandmodal">
-						<i class="material-icons">add_circle_outline</i>
-					</a>
-				</div>
+    </select><a class="button" data-toggle="modal" href="#brandmodal">
+					<i class="material-icons">add_circle_outline</i>
+				</a>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 write-filters">
 				<label for="Choose Model"></label>
 				<select class = "form-control" id="model" name="model_name">
         <option value="" disabled selected>Choose Model</option>
@@ -57,7 +54,7 @@
 					<i class="material-icons">add_circle_outline</i>
 				</a>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 write-filters">
 				<label for="Choose Model"></label>
 				<select class = "form-control" id="score" name="score">
         <option value="" disabled selected>Score</option>
@@ -66,87 +63,90 @@
                     {% endfor %}
                 </select>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-md-8 write-filters">
 				<label for="exampleFormControlTextarea1">Write your review here</label>
 				<textarea name="review_text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
 			</div>
 			<label for="basic-url">Your Image URL</label>
-			<div class="input-group mb-3">
+			<div class="input-group mb-3 write-filters">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon3">URL</span>
 				</div>
 				<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 </div>
-				<div class="col-sm8">
+<div class="form-group col-sm-8">
+							<input id="review_text" name="upvote"  type="hidden" value ="0" class="form-control" readonly></input>
+						</div>
+				<div class="">
 					<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
                 </button>
 				</div>
 			</div>
 		</div>
-</form>
+	</form>
 
-<div class="modal fade" id="brandmodal" tabindex="-1" role="dialog" aria-labelledby="brandmodal" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Add a new brand to database</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<div class="modal fade" id="brandmodal" tabindex="-1" role="dialog" aria-labelledby="brandmodal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Add a new brand to database</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-			</div>
-			<div class="modal-body">
-				<form action="{{ url_for('insert_brand') }}" method="POST" class="col-sm12">
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">poll</i>
-							<input id="brand_name" name="brand_name" type="text" class="validate" required>
-							<label for="brand_name"></label>
+				</div>
+				<div class="modal-body">
+					<form action="{{ url_for('insert_brand') }}" method="POST" class="col-sm12">
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">poll</i>
+								<input id="brand_name" name="brand_name" type="text" class="validate" required>
+								<label for="brand_name"></label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<button class="btn btn-primary" type="submit">Add Brand
+						<div class="row">
+							<button class="btn btn-primary" type="submit">Add Brand
             <i class="material-icons right">send</i>
         </button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="" data-dismiss="modal">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="" data-dismiss="modal">Cancel</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="modelmodal" tabindex="-1" role="dialog" aria-labelledby="modelmodal" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Add a new model to database</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<div class="modal fade" id="modelmodal" tabindex="-1" role="dialog" aria-labelledby="modelmodal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Add a new model to database</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-			</div>
-			<div class="modal-body">
-				<form action="{{ url_for('insert_model') }}" method="POST" class="col-sm12">
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">poll</i>
-							<input id="model_name" name="model_name" type="text" class="validate" required>
-							<label for="model_name"></label>
+				</div>
+				<div class="modal-body">
+					<form action="{{ url_for('insert_model') }}" method="POST" class="col-sm12">
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">poll</i>
+								<input id="model_name" name="model_name" type="text" class="validate" required>
+								<label for="model_name"></label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<button class="btn btn-primary" type="submit">Add Model
+						<div class="row">
+							<button class="btn btn-primary" type="submit">Add Model
             <i class="material-icons right">send</i>
         </button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="" data-dismiss="modal">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="" data-dismiss="modal">Cancel</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-{% endblock %}
+	{% endblock %}

@@ -14,41 +14,29 @@
 
 
 <div class="container">
-	<div class="review-card">
-		<div class="row justify-content-center">
-			<div class="col-xs-12 col-md-5 filters ">
-				<form action="{{url_for('filter_reviews')}}" method="POST">
-					<div class="form-group">
-						<label for="Choose Category"></label>
-						<select class ="form-control" id="category" name="category_name">
+	<form class="form-inline" action="{{url_for('filter_reviews')}}" method="POST">
+		<label for="Choose Category"></label>
+		<select class ="form-control filters" id="category" name="category_name">
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                             {% endfor %}
                             </select>
-					</div>
-			</div>
-			<div class="col-xs-12 col-md-5 filters">
-				<label for="Choose Brand"></label>
-				<select class = "form-control" id="brand" name="brand_name">
+		<label for="Choose Brand"></label>
+		<select class = "form-control filters" id="brand" name="brand_name">
                             <option value="" disabled selected>Choose Brand</option>
                             {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                             {% endfor %}
                             </select>
-			</div>
-		</div>
-		<div class="row col-xs-12">
-			<button class="btn filters filters-btn" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter<i class="material-icons right">send</i>
+		<button class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter
                     </button>
-			</form>
-			<a class="btn filters filters-btn" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
-				href="{{url_for('get_reviews')}}">Reset
-				Filters
-				<i class="material-icons">refresh</i>
-			</a>
-		</div>
-	</div>
+
+		<a class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
+			href="{{url_for('get_reviews')}}">Reset
+			Filters
+		</a>
+	</form>
 </div>
 
 {% for review in reviews %}
@@ -61,7 +49,7 @@
 				href="{{review.image_url}}" target="_blank">
 				<i class="material-icons">camera_alt</i>
 			</a>
-            <a class="" data-toggle="tooltip" data-placement="top" title="Click to see this item on American Golf"
+			<a class="" data-toggle="tooltip" data-placement="top" title="Click to see this item on American Golf"
 				href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
 				<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
 			</a></div>

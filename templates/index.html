@@ -1,25 +1,26 @@
 {% extends 'base.html'%}
 {% block content %}
-<section class="main">
-	<div class="jumbotron main-image">
-		<div class="container">
-			<h1 class="display-4">All Golf Everything</h1>
-			<p class="lead">Your one stop resource for everything golf related, with none of the noise. By
-				golfers, for golfers.</p>
-			<hr class="my-4">
-			<p>Already a member of the community? Login below! Otherwise sign up to join us and start
-				contributing.
-			</p>
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
-				<a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Sign Up</a>
-			</p>
-		</div>
+<div class="jumbotron main-image">
+	<div class="container">
+		<h1 class="display-4">All Golf Everything</h1>
+		<p class="lead">Your one stop resource for everything golf related, with none of the noise. By
+			golfers, for golfers.</p>
+		<hr class="my-4">
+		<p>Already a member of the community? Login below! Otherwise sign up to join us and start
+			contributing.
+		</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+			<a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Sign Up</a>
+		</p>
 	</div>
-	<div class="review-card">
+</div>
+<div class="container">
+	<div class="review-card-intro">
+    <hr class="my-4">
 		<div class="row intro-light">
-			<h3>Join a new golfing community</h3>
-		</div>
+			<h3>Join a new golfing community</h3>   
+		</div> 
 		<div class="row intro-light">
 			<p>A place for golfers to share reviews on anything from the latest gear to their old shoes that
 				they just love!</p>
@@ -38,7 +39,8 @@
 			<p>Up to date reviews from our in house experts who take things on course
 				and give you accurate feedback.</p>
 		</div>
+        <hr class="my-4">
 	</div>
-	</main>
+</div>
 
-	{% endblock %}
+{% endblock %}

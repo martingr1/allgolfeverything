@@ -88,6 +88,42 @@ def logout():
 def add_review():
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
 
+@app.route('/insert_review', methods=['POST'])
+def insert_review():
+
+    if 'user' in session:
+        reviews = mongo.db.reviews
+        reviews.insert_one({
+            'review_title': request.form.get('review_title'),
+            'category_name': request.form.get('category_name'),
+            'brand_name': request.form.get('brand_name'),
+            'model_name': request.form.get('model_name'),
+            'score': request.form.get('score'),
+            'review_text': request.form.get('review_text'),
+            'image_url': request.form.get('image_url'),
+            'author': session['user'],
+            'upvote': int(request.form.get('upvote'))
+        })
+        flash("Review submitted, thank you.")
+        return redirect(url_for('get_reviews'))
+
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
+
+@app.route('/edit_review/<review_id>')
+def edit_review(review_id):
+    
+    the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    all_categories = mongo.db.category.find()
+    all_brands = mongo.db.brands.find()
+    all_models = mongo.db.models.find()
+    all_text = mongo.db.reviews.review_text.find()
+    all_images = mongo.db.reviews.image_url.find()
+    all_scores = mongo.db.score.find()
+    all_upvote = mongo.db.reviews.upvote.find()
+    return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
+                           models=all_models, score=all_scores, image=all_images, upvote=all_upvote)
 
 @app.route('/get_reviews')
 def get_reviews():
@@ -129,19 +165,6 @@ def filter_reviews():
     else:
         all_reviews = mongo.db.reviews.find()
         return render_template("reviews.html", reviews=all_reviews, brands=all_brands, category=all_categories)
-
-@app.route('/insert_review', methods=['POST'])
-def insert_review():
-
-    if 'user' in session:
-        reviews = mongo.db.reviews
-        reviews.insert_one(request.form.to_dict())
-        flash("Review submitted, thank you.")
-        return redirect(url_for('get_reviews'))
-
-    else:
-        flash("You must be logged in to do this!")
-        return render_template("login.html")
 
 @app.route('/insert_brand', methods=['POST'])
 def insert_brand():
@@ -189,18 +212,7 @@ def insert_model():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
-@app.route('/edit_review/<review_id>')
-def edit_review(review_id):
-    the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    all_categories = mongo.db.category.find()
-    all_brands = mongo.db.brands.find()
-    all_models = mongo.db.models.find()
-    all_text = mongo.db.reviews.review_text.find()
-    all_images = mongo.db.reviews.image_url.find()
-    all_scores = mongo.db.score.find()
-    all_upvote = mongo.db.reviews.upvote.find()
-    return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
-                           models=all_models, score=all_scores, image=all_images, upvote=all_upvote)
+
 
 
 @app.route('/update_review/<review_id>', methods=["POST"])
@@ -229,11 +241,15 @@ def delete_review(review_id):
 
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
-    if request.method == 'POST':
-        query = request.form.get("search_query")
-        results = mongo.db.reviews.find({"$text": {"$search": query}})
-    return render_template("search.html", results=results, review=mongo.db.reviews.find())
 
+    if 'user' in session:
+        if request.method == 'POST':
+            query = request.form.get("search_query")
+            results = mongo.db.reviews.find({"$text": {"$search": query}})
+        return render_template("search.html", results=results, review=mongo.db.reviews.find())
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html") 
 
 @app.route('/upvoted/<review_id>')
 def upvoted(review_id):
