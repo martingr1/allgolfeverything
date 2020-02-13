@@ -26,28 +26,28 @@ def get_login():
 
 @app.route('/login', methods=['GET'])
 def login():
-    if 'user' in session:
-        existing_user = mongo.db.users.find_one({"username": session['user']})
-        if existing_user:
+    if 'user' in session: #Check if user is logged in.
+        existing_user = mongo.db.users.find_one({"username": session['user']}) #Check if user exists in db already.
+        if existing_user: #If it does, display message on index.
             flash("You are logged in already!")
             return redirect(url_for('get_index'))
     else:
-        return render_template("login.html")
+        return render_template("login.html") #If not, redirect to login.
 
 
 @app.route('/user_auth', methods=['POST'])
 def user_auth():
-    form = request.form.to_dict()
-    existing_user = mongo.db.users.find_one({"username": form['username']})
-    if existing_user:
+    form = request.form.to_dict() 
+    existing_user = mongo.db.users.find_one({"username": form['username']}) #Initial check to see if user exists already.
+    if existing_user: #If username matches db, check password.
         if check_password_hash(existing_user['password'], form['password']):
             session['user'] = form['username']
-            flash("You were logged in successfully!")
+            flash("You were logged in successfully!")#If they match, log the user in and show reviews page.
             return redirect(url_for('get_reviews'))
-        else:
+        else: #If either username or password don't match, display message and show login page.
             flash("Invalid credentials supplied, please check your username or password")
             return redirect(url_for('get_login'))
-    else:
+    else: #If username doesn't exist in users, the user must register. Display message and redirect to registration.
         flash("You must be registered to access the platform!")
         return redirect(url_for('register'))
 
@@ -88,29 +88,6 @@ def logout():
 def add_review():
     return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
 
-@app.route('/insert_review', methods=['POST'])
-def insert_review():
-
-    if 'user' in session:
-        reviews = mongo.db.reviews
-        reviews.insert_one({
-            'review_title': request.form.get('review_title'),
-            'category_name': request.form.get('category_name'),
-            'brand_name': request.form.get('brand_name'),
-            'model_name': request.form.get('model_name'),
-            'score': request.form.get('score'),
-            'review_text': request.form.get('review_text'),
-            'image_url': request.form.get('image_url'),
-            'author': session['user'],
-            'upvote': int(request.form.get('upvote'))
-        })
-        flash("Review submitted, thank you.")
-        return redirect(url_for('get_reviews'))
-
-    else:
-        flash("You must be logged in to do this!")
-        return render_template("login.html")
-
 @app.route('/get_reviews')
 def get_reviews():
     
@@ -120,6 +97,49 @@ def get_reviews():
     else:
         flash("You must be logged in to do this!") #If they aren't, send them to the login page.
         return render_template("login.html")
+
+@app.route('/insert_review', methods=['POST'])
+def insert_review():
+
+    if 'user' in session: # Check if the user is logged in.
+        reviews = mongo.db.reviews #If they are, take form values from template and create a new document
+                                    #in the collection.
+        reviews.insert_one({
+            'review_title': request.form.get('review_title'),
+            'category_name': request.form.get('category_name'),
+            'brand_name': request.form.get('brand_name'),
+            'model_name': request.form.get('model_name'),
+            'score': request.form.get('score'),
+            'review_text': request.form.get('review_text'),
+            'image_url': request.form.get('image_url'),
+            'author': session['user'], #add session user as a new string field, 'author' to be user for validation.
+            'upvote': int(request.form.get('upvote')) #Add upvote as a new integer key with value 0 to work correctly with upvote function.
+        })
+        flash("Review submitted, thank you.") 
+        return redirect(url_for('get_reviews'))
+
+    else:
+        flash("You must be logged in to do this!")#If there is no valid session, redirect to login page.
+        return render_template("login.html")
+
+@app.route('/update_review/<review_id>', methods=["POST"])
+def update_review(review_id):
+
+    reviews = mongo.db.reviews
+    reviews.update({'_id': ObjectId(review_id)},
+                   {
+       'review_title': request.form.get('review_title'),
+            'category_name': request.form.get('category_name'),
+            'brand_name': request.form.get('brand_name'),
+            'model_name': request.form.get('model_name'),
+            'score': request.form.get('score'),
+            'review_text': request.form.get('review_text'),
+            'image_url': request.form.get('image_url'),
+            'author': session['user'], #add session user as a new string field, 'author' to be user for validation.
+            'upvote': int(request.form.get('upvote')) #Add upvote as a new integer key with value 0 to work correctly with upvote function.
+    })
+    flash("Review successfully edited.")
+    return redirect(url_for('get_reviews'))
         
 @app.route('/edit_review/<review_id>', methods=['GET'])
 def edit_review(review_id):
@@ -154,77 +174,76 @@ def edit_review(review_id):
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
     
-    if 'user' in session:
+    if 'user' in session: # Check if the user is logged in.
         user = session['user']
         the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-        the_author = the_review['author']
+        the_author = the_review['author'] #If they are, check if their user session name matches the author name of the document they
+                                #are trying to delete.
         
         if user == the_author:
-            mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+            mongo.db.reviews.remove({"_id": ObjectId(review_id)}) #If it does, delete the document and show message.
             flash("Review deleted")
-            return redirect(url_for('get_reviews'))
+            return redirect(url_for('get_reviews'))#Redirect to reviews.
 
         else:
-            flash("You can only edit your own posts!")
+            flash("You can only edit your own posts!")#If there is no match, display message on the reviews page.
         return redirect(url_for('get_reviews'))
     
     else:
-        flash("You must be logged in to do this!")
+        flash("You must be logged in to do this!")#If there is no valid session, redirect to login page.
         return render_template("login.html")
-
-
 
 @app.route('/filter_reviews', methods=['POST'])
 def filter_reviews():
 
-    query = {}
+    query = {} #create a query variable to pass to mongo and search the db
     all_categories = mongo.db.category.find()
     all_brands = mongo.db.brands.find()
-    brands = request.form.get("brand_name")
-    categories = request.form.get("category_name")
+    brands = request.form.get("brand_name")#get the value from brand input
+    categories = request.form.get("category_name")#get the value from category input
     
-    if 'brand_name' in request.form:
+    if 'brand_name' in request.form: #if brand selector has a value
         
-        if 'category_name' in request.form:
+        if 'category_name' in request.form: #check if category selector also has a value
             
-            query.update({"category_name": categories, "brand_name": brands})
+            query.update({"category_name": categories, "brand_name": brands}) #if both are true, create query and filter results
             reviews = mongo.db.reviews.find(query)
             return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
         
-        else:
+        else: #if category has no value, use only the brand filter and return results in reviews template.
             query.update({"brand_name": brands})
             reviews = mongo.db.reviews.find(query)
             return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
    
-    elif 'category_name' in request.form:
-        query.update({"category_name": categories})
+    elif 'category_name' in request.form: #if brand has no value, check if category has a value
+        query.update({"category_name": categories})#if it does, filter by category.
         reviews = mongo.db.reviews.find(query)
         return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
     
     else:
-        all_reviews = mongo.db.reviews.find()
+        all_reviews = mongo.db.reviews.find() #if neither has a value, reload the default template for reviews.
         return render_template("reviews.html", reviews=all_reviews, brands=all_brands, category=all_categories)
 
 @app.route('/insert_brand', methods=['POST'])
 def insert_brand():
     
-    if 'user' in session:
+    if 'user' in session: #Check if user is logged in.
         
-        if request.method == 'POST':
+        if request.method == 'POST': #if request is made, get the brand name from the form.
             brands = mongo.db.brands
             existing_brand = brands.find_one(
             {'brand_name': request.form.get('brand_name')})
                 
-            if existing_brand is None:
+            if existing_brand is None:#check if the brand exists already in db. If not, add to brands.
                 brand_doc = {'brand_name': request.form.get('brand_name')}
                 brands.insert_one(brand_doc)
                 flash("Brand successfully added, please continue with your review.")
                 return redirect(url_for('add_review'))          
 
-            else: 
+            else: #If it exists, flash message and redirect to write reviews page.
                 flash("Brand already exists in database, please select from dropdown.")
                 return redirect(url_for('add_review'))    
-    else:
+    else: #If no valid session, flash message and redirect to login.
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
@@ -251,26 +270,9 @@ def insert_model():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
-@app.route('/update_review/<review_id>', methods=["POST"])
-def update_review(review_id):
-
-    reviews = mongo.db.reviews
-    reviews.update({'_id': ObjectId(review_id)},
-                   {
-        'category_name': request.form.get('category_name'),
-        'image_url': request.form.get('image_url'),
-        'brand_name': request.form.get('brand_name'),
-        'model_name': request.form.get('model_name'),
-        'review_text': request.form.get('review_text'),
-        'score': request.form.get('score'),
-        'upvote': int(request.form.get('upvote'))
-    })
-    flash("Review successfully edited.")
-    return redirect(url_for('get_reviews'))
-
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
-
+    
     if 'user' in session:
         if request.method == 'POST':
             query = request.form.get("search_query")

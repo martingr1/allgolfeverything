@@ -32,7 +32,13 @@
 				</div>
 			</li>
 		</ul>
-		<form action="/search_reviews" class="form-inline my-2 my-lg-0" method="POST">
+		<div class="login-nav">
+
+			{% if session.user %}
+			Currently logged in as {{session.user}}
+			{% endif %}
+		</div>
+		<form action="{{'/search_reviews'}}" class="form-inline my-2 my-lg-0" method="POST">
 			<input class="form-control mr-sm-2" name="search_query" type="search" placeholder="Quick search reviews" aria-label="Search" required>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
@@ -80,7 +86,6 @@
 		$(function () {
   
     $('[data-toggle="tooltip"]').tooltip()
-    $('#example').tooltip(options)
 })
 	</script>
 </body>

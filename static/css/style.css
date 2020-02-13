@@ -137,3 +137,8 @@ color: whitesmoke;
     width: 80px;
     padding: 2px;
 }
+
+.login-nav {
+    padding-right: 2px;
+    color: whitesmoke;
+}
