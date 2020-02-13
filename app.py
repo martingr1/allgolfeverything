@@ -111,17 +111,28 @@ def insert_review():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
+@app.route('/get_reviews')
+def get_reviews():
+    
+    if 'user' in session: # Check if the user is logged in.
+        reviews = mongo.db.reviews.find().sort("_id", -1).limit(5) # If they are, display the top 5 newest reviews.
+        return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find().sort("_id", -1), brands=mongo.db.brands.find())
+    else:
+        flash("You must be logged in to do this!") #If they aren't, send them to the login page.
+        return render_template("login.html")
+
 @app.route('/edit_review/<review_id>', methods=['GET'])
 def edit_review(review_id):
 
-    if 'user' in session:
+    if 'user' in session: # Check if the user is logged in.
         user = session['user']
         the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
         the_author = the_review["author"]
         
-        if user == the_author:
+        if user == the_author: #If they are, check if their user session name matches the author name of the document they
+                                #are trying to edit. If it does, render the editreview template.
        
-            all_categories = mongo.db.category.find()
+            all_categories = mongo.db.category.find() 
             all_brands = mongo.db.brands.find()
             all_models = mongo.db.models.find()
             all_text = mongo.db.reviews.review_text.find()
@@ -132,6 +143,27 @@ def edit_review(review_id):
             return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
                            models=all_models, score=all_scores, image=all_images, upvote=all_upvote)
         
+        else:
+            flash("You can only edit your own posts!") #If there is no match, display message on the reviews page.
+        return redirect(url_for('get_reviews'))
+    
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
+
+@app.route('/delete_review/<review_id>')
+def delete_review(review_id):
+    
+    if 'user' in session:
+        user = session['user']
+        the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+        the_author = the_review['author']
+        
+        if user == the_author:
+            mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+            flash("Review deleted")
+            return redirect(url_for('get_reviews'))
+
         else:
             flash("You can only edit your own posts!")
         return redirect(url_for('get_reviews'))
@@ -227,9 +259,6 @@ def insert_model():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
-
-
-
 @app.route('/update_review/<review_id>', methods=["POST"])
 def update_review(review_id):
 
@@ -246,13 +275,6 @@ def update_review(review_id):
     })
     flash("Review successfully edited.")
     return redirect(url_for('get_reviews'))
-
-
-@app.route('/delete_review/<review_id>')
-def delete_review(review_id):
-    the_review = mongo.db.reviews.remove({'_id': ObjectId(review_id)})
-    return redirect(url_for('get_reviews'))
-
 
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
