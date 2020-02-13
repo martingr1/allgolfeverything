@@ -55,34 +55,43 @@ def user_auth():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
-    if 'user' in session:
+    if 'user' in session: #Check if user is logged in 
         flash('You are already signed in!')
         return redirect(url_for('get_index'))
 
     if request.method == 'POST':
         users = mongo.db.users
         existing_user = users.find_one(
-            {'username': request.form.get('username')})
-
-        if existing_user is None:
-            securepass = generate_password_hash(request.form.get('password'))
-            users.insert_one({'username': request.form.get(
-                'username'), 'password': securepass})
-            session['username'] = request.form.get('username')
-            flash('Thank you for registering with All Golf Everything, please login')
-            return redirect(url_for('login'))
+            {'username': request.form.get('username')}) #Create variable for existing user and check against db
+                                                        #for existing username
+        if existing_user is None: #if user doesn't exist, get the password from the form
+            password = request.form.get('password')
+            if password: #if there is an entry in the password field, encrypt it and submit to db
+                securepass = generate_password_hash(password)
+                users.insert_one({'username': request.form.get(
+                    'username'), 'password': securepass})
+                #session['username'] = request.form.get('username')
+                flash('Thank you for registering with All Golf Everything, please login')
+                return redirect(url_for('login'))
+            else:
+                flash('You cannot have a blank password') #if password is blank, display message and redirect to
+                return redirect(url_for('register'))        #register template
         else:
-            flash("That username already exists!")
-            return redirect(url_for('register'))
+            flash("That username already exists!")#if username already in users, display message and
+            return redirect(url_for('register'))# redirect to register template
 
     return render_template("register.html")
 
 
 @app.route("/logout")
 def logout():
-    session.pop("user", None)
-    flash("You have been logged out")
-    return render_template("login.html")
+    if 'user' in session: #Check if user is logged in
+        session.pop("user", None) #logout user
+        flash("You have been logged out")
+        return render_template("login.html")
+    else:
+        flash("You are not logged in.")#If user is not logged in, display message and redirect to login template
+        return render_template("login.html")
 
 @app.route('/add_review')
 def add_review():
@@ -250,7 +259,7 @@ def insert_brand():
 @app.route('/insert_model', methods=['POST'])
 def insert_model():
 
-    if 'user' in session:
+    if 'user' in session:  
         
         if request.method == 'POST':
             models = mongo.db.models

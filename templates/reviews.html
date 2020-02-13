@@ -43,8 +43,8 @@
 <div class="container">
 	<div class="review-card col-xs-12">
 		<img class= "default-image" src="static/images/golf_image.jpg" alt="default image">
-		<div class="row review-text"><strong>Title:{{review.review_title}}</strong></div>
-        <div class="row review-text"><strong>Author:{{review.author}}</strong></div>
+		<div class="row review-text">Author:<strong>{{review.author}}</strong></div>
+        <div class="row review-text">Title:<strong>{{review.review_title}}</strong></div>
 		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
 		<div class="row review-text"><a class="" data-toggle="tooltip" data-placement="top" title="Click for image"
 				href="{{review.image_url}}" target="_blank">
@@ -54,9 +54,9 @@
 				href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
 				<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
 			</a></div>
-		<div class="row review-text"><strong>Category: </strong> {{review.category_name}}</div>
-		<div class="row review-text"><strong>Brand: </strong> {{review.brand_name}}</div>
-		<div class="row review-text"><strong>Model: </strong> {{review.model_name}}</div>
+		<div class="row review-text">Category: <strong> {{review.category_name}}</strong></div>
+		<div class="row review-text">Brand: <strong> {{review.brand_name}}</strong></div>
+		<div class="row review-text">Model: <strong>{{review.model_name}}</strong> </div>
 		<div class="row review-text">{{review.review_text}}</div>
 		<div class="row review-text">{{review.upvote}} Like(s)</div>
 		<hr class="my-4">

@@ -35,7 +35,9 @@
 		<div class="login-nav">
 
 			{% if session.user %}
-			Currently logged in as {{session.user}}
+			<i class="material-icons">
+account_box
+</i>{{session.user}}
 			{% endif %}
 		</div>
 		<form action="{{'/search_reviews'}}" class="form-inline my-2 my-lg-0" method="POST">
