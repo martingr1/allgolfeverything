@@ -120,7 +120,7 @@ def get_reviews():
     else:
         flash("You must be logged in to do this!") #If they aren't, send them to the login page.
         return render_template("login.html")
-
+        
 @app.route('/edit_review/<review_id>', methods=['GET'])
 def edit_review(review_id):
 
@@ -148,7 +148,7 @@ def edit_review(review_id):
         return redirect(url_for('get_reviews'))
     
     else:
-        flash("You must be logged in to do this!")
+        flash("You must be logged in to do this!") #If there is no valid session, redirect to login page.
         return render_template("login.html")
 
 @app.route('/delete_review/<review_id>')
@@ -172,15 +172,7 @@ def delete_review(review_id):
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
-@app.route('/get_reviews')
-def get_reviews():
-    
-    if 'user' in session:
-        reviews = mongo.db.reviews.find().sort("_id", -1).limit(5)
-        return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find().sort("_id", -1), brands=mongo.db.brands.find())
-    else:
-        flash("You must be logged in to do this!")
-        return render_template("login.html")
+
 
 @app.route('/filter_reviews', methods=['POST'])
 def filter_reviews():
