@@ -111,19 +111,34 @@ def insert_review():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
-@app.route('/edit_review/<review_id>')
+@app.route('/edit_review/<review_id>', methods=['GET'])
 def edit_review(review_id):
-    
-    the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    all_categories = mongo.db.category.find()
-    all_brands = mongo.db.brands.find()
-    all_models = mongo.db.models.find()
-    all_text = mongo.db.reviews.review_text.find()
-    all_images = mongo.db.reviews.image_url.find()
-    all_scores = mongo.db.score.find()
-    all_upvote = mongo.db.reviews.upvote.find()
-    return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
+
+    if 'user' in session:
+        user = session['user']
+        the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+        the_author = the_review["author"]
+        
+        if user == the_author:
+       
+            all_categories = mongo.db.category.find()
+            all_brands = mongo.db.brands.find()
+            all_models = mongo.db.models.find()
+            all_text = mongo.db.reviews.review_text.find()
+        
+            all_images = mongo.db.reviews.image_url.find()
+            all_scores = mongo.db.score.find()
+            all_upvote = mongo.db.reviews.upvote.find()
+            return render_template('editreview.html', review=the_review, text=all_text, category=all_categories, brands=all_brands,
                            models=all_models, score=all_scores, image=all_images, upvote=all_upvote)
+        
+        else:
+            flash("You can only edit your own posts!")
+        return redirect(url_for('get_reviews'))
+    
+    else:
+        flash("You must be logged in to do this!")
+        return render_template("login.html")
 
 @app.route('/get_reviews')
 def get_reviews():
@@ -200,10 +215,10 @@ def insert_model():
             {'model_name': request.form.get('model_name')})
                 
             if existing_model is None:
-                    model_doc = {'model_name': request.form.get('model_name')}
-                    models.insert_one(model_doc)
-                    flash("Model successfully added, please continue with your review.")
-                    return redirect(url_for('add_review'))          
+                model_doc = {'model_name': request.form.get('model_name')}
+                models.insert_one(model_doc)
+                flash("Model successfully added, please continue with your review.")
+                return redirect(url_for('add_review'))          
 
             else: 
                 flash("Model already exists in database, please select from dropdown.")
@@ -235,7 +250,7 @@ def update_review(review_id):
 
 @app.route('/delete_review/<review_id>')
 def delete_review(review_id):
-    mongo.db.reviews.remove({'_id': ObjectId(review_id)})
+    the_review = mongo.db.reviews.remove({'_id': ObjectId(review_id)})
     return redirect(url_for('get_reviews'))
 
 

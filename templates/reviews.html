@@ -43,7 +43,8 @@
 <div class="container">
 	<div class="review-card col-xs-12">
 		<img class= "default-image" src="static/images/golf_image.jpg" alt="default image">
-		<div class="row review-text"><strong>{{review.review_title}}</strong></div>
+		<div class="row review-text"><strong>Title:{{review.review_title}}</strong></div>
+        <div class="row review-text"><strong>Author:{{review.author}}</strong></div>
 		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
 		<div class="row review-text"><a class="" data-toggle="tooltip" data-placement="top" title="Click for image"
 				href="{{review.image_url}}" target="_blank">
