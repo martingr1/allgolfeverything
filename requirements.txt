@@ -2,6 +2,7 @@ Babel==2.8.0
 blinker==1.4
 cffi==1.13.2
 Click==7.0
+dnspython==1.16.0
 Flask==1.1.1
 Flask-BabelEx==0.9.3
 Flask-Login==0.4.1
