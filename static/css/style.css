@@ -141,4 +141,13 @@ color: whitesmoke;
 .login-nav {
     padding-right: 2px;
     color: whitesmoke;
+    font-size: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    margin: 1%;
+}
+
+.login-icon {
+    font-size: 20px;
 }
