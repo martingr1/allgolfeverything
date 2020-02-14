@@ -1,8 +1,13 @@
 import os
+from os import path
 from flask import Flask, render_template, redirect, request, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+
+
+if path.exists("env.py"):
+    import env
 
 app = Flask(__name__)
 
@@ -137,7 +142,7 @@ def update_review(review_id):
     reviews = mongo.db.reviews
     reviews.update({'_id': ObjectId(review_id)},
                    {
-       'review_title': request.form.get('review_title'),
+            'review_title': request.form.get('review_title'),
             'category_name': request.form.get('category_name'),
             'brand_name': request.form.get('brand_name'),
             'model_name': request.form.get('model_name'),
