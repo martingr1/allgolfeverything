@@ -100,7 +100,12 @@ def logout():
 
 @app.route('/add_review')
 def add_review():
-    return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
+
+    if 'user' in session:
+        return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
+    else:
+        flash("You must be logged in to do this!") #If they aren't, send them to the login page.
+        return render_template("login.html")
 
 @app.route('/get_reviews')
 def get_reviews():

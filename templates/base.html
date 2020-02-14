@@ -32,18 +32,14 @@
 				</div>
 			</li>
 		</ul>
-
 		<form action="{{'/search_reviews'}}" class="form-inline my-2 my-lg-0" method="POST">
 			<input class="form-control mr-sm-2" name="search_query" type="search" placeholder="Quick search reviews" aria-label="Search" required>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
-
 		<div class="login-nav d-flex align-items-center justify-content-center">
 
 			{% if session.user %}
-			<i class="material-icons login-icon">
-account_box
-</i>{{session.user}}
+			<i class="material-icons login-icon">account_box</i>{{session.user}}
 			{% endif %}
 		</div>
 	</div>
