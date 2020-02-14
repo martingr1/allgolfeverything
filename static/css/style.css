@@ -9,6 +9,9 @@
     color: blue;
 }
 
+.jumbotron {
+    background-color: rgba(0,0,0,0)
+}
 .wrapper-heading {
     font-size: 50px;
     font-weight: 700;
@@ -44,6 +47,7 @@ color: white;
 background-color:#228B22;
 border-color: #228B22;
 width: 150px;
+height: 40px;
 padding: 5px;
 }
 
@@ -119,7 +123,6 @@ color: whitesmoke;
 }
 
 .write-filters {
-    max-width: 350px;
     padding-left: 5px;
     padding-right: 5px;
     margin: 0 auto;
@@ -150,4 +153,24 @@ color: whitesmoke;
 
 .login-icon {
     font-size: 20px;
+}
+
+.btn-icon {
+    padding-left: 5%;
+    margin: 0 auto;
+}
+
+.btn-cancel {
+    color: black;
+    background-color:rgb(121, 120, 120);
+    border-color: rgb(121, 120, 120);
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+}
+
+.btn-cancel:hover{
+color: rgb(121, 120, 120);
+background-color: white;
+border-color: rgb(121, 120, 120)
 }
