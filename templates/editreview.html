@@ -16,7 +16,7 @@
 		<div class="review-card">
 			<div class="form-group col-sm-8">
 				<label for="Choose Category"></label>
-                <div class="form-group col-sm-8 text-wrap">
+                <div class="form-group">
 				<input id="review_text" name="review_title"  type="text" value ="{{review.review_title}}" class="form-control text-truncate"></input>
 			</div>
 				<select class = "form-control" id="category" name="category_name">
@@ -86,9 +86,10 @@
             </div>
 			<div class="col s8">
 				<button class="btn waves-effect waves-light" type="submit">Submit Review<i class="material-icons right">send</i>
-                </button>
+                </button></form>
+                <button type="button" class="btn-cancel-white" >Cancel</button>
 			</div>
 		</div>
 	</div>
-</form>
+
 {% endblock %}

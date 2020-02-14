@@ -1,80 +1,93 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<div class="jumbotron main-image">
+<div class="jumbotron">
 	<div class="container">
-		<h1 class="display-4">Reviews</h1>
-		<p class="lead">Welcome to the reviews section of All Golf.</p>
-		<hr class="my-4">
-		<p>The top 10 newest results are shown by default, or you can filter results by either category, brand or
-			both.
-		</p>
+		<div class="card main-card">
+			<h1 class="display-4">Reviews</h1>
+			<p class="lead">Welcome to the reviews section of All Golf.</p>
+			<p class="lead">The top 10 newest results are shown by default, or you can filter results by either
+				category, brand or
+				both.
+			</p>
+		</div>
 	</div>
 </div>
 
 
-<div class="container">
-	<form class="form-inline" action="{{url_for('filter_reviews')}}" method="POST">
-		<label for="Choose Category"></label>
-		<select class ="form-control filters" id="category" name="category_name">
+
+<form class="form-inline" action="{{url_for('filter_reviews')}}" method="POST">
+	<label for="Choose Category"></label>
+	<select class ="form-control filters" id="category" name="category_name">
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                             {% endfor %}
                             </select>
-		<label for="Choose Brand"></label>
-		<select class = "form-control filters" id="brand" name="brand_name">
+	<label for="Choose Brand"></label>
+	<select class = "form-control filters" id="brand" name="brand_name">
                             <option value="" disabled selected>Choose Brand</option>
                             {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                             {% endfor %}
                             </select>
-		<button class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter
+	<button class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter
                     </button>
 
-		<a class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
-			href="{{url_for('get_reviews')}}">Reset
-			Filters
-		</a>
-	</form>
-</div>
+	<a class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
+		href="{{url_for('get_reviews')}}">Reset
+		Filters
+	</a>
+</form>
 
-{% for review in reviews %}
+
+
 <div class="container">
-	<div class="review-card col-xs-12">
-		<img class= "default-image" src="static/images/golf_image.jpg" alt="default image">
-		<div class="row review-text">Author:<strong>{{review.author}}</strong></div>
-        <div class="row review-text">Title:<strong>{{review.review_title}}</strong></div>
-		<div class="row review-text">Rating (out of 5): {{review.score}}</div>
-		<div class="row review-text"><a class="" data-toggle="tooltip" data-placement="top" title="Click for image"
-				href="{{review.image_url}}" target="_blank">
-				<i class="material-icons">camera_alt</i>
+	<div class="row">
+		{% for review in reviews %}
+		<div class="card-deck col-xs-12 col-md-6">
+			<div class="card text-white bg-dark "> 
+				<img class="card-img-top img-fluid default-image" src="{{review.image_url}}" alt="Product image">
+				<div class="row review-text">
+					<a class="" data-toggle="tooltip" data-placement="top"
+						title="Click to see this item on American Golf"
+						href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
+						<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
 			</a>
-			<a class="" data-toggle="tooltip" data-placement="top" title="Click to see this item on American Golf"
-				href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
-				<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
-			</a></div>
-		<div class="row review-text">Category: <strong> {{review.category_name}}</strong></div>
-		<div class="row review-text">Brand: <strong> {{review.brand_name}}</strong></div>
-		<div class="row review-text">Model: <strong>{{review.model_name}}</strong> </div>
-		<div class="row review-text">{{review.review_text}}</div>
-		<div class="row review-text">{{review.upvote}} Like(s)</div>
-		<hr class="my-4">
-		<div class="col-xs-12">
-			<a class="btn rev-btn" data-toggle="tooltip" data-placement="top" title="Click to like!"
-				href="{{url_for('upvoted', review_id=review._id)}} ">
-				<i class="material-icons">thumb_up</i>
-			</a>
-			<a class="btn rev-btn" data-toggle="tooltip" data-placement="top" title="Click to update this review"
-				href="{{url_for('edit_review', review_id=review._id)}}">
-				<i class="material-icons">add</i>
-			</a>
-			<a class="btn rev-btn" data-toggle="tooltip" data-placement="top" title="Click to delete this review"
-				href="{{url_for('delete_review', review_id=review._id)}}">
-				<i class="material-icons">delete</i>
-			</a>
+				</div>
+				<div class="card-header">
+					<div class="card-title">
+						<h5 class="lead">{{review.review_title}}</h5>
+					</div>
+					<div class="row review-text lead">Reviewed by {{review.author}}</div>
+					<div class="row review-text lead">Rating (out of 5): {{review.score}}</div>
+					<div class="row review-text lead">Category: {{review.category_name}}</div>
+					<div class="row review-text lead">Brand: {{review.brand_name}}</div>
+					<div class="row review-text lead">Model: {{review.model_name}} </div>
+				</div>
+				<div class="card-body">
+					<p class="card-text">{{review.review_text}}</p>
+					<p class="review-text lead">{{review.upvote}} Like(s)</p>
+				</div>
+				<div class="card-footer">
+					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top" title="Click to like!"
+						href="{{url_for('upvoted', review_id=review._id)}} ">
+						<i class="material-icons">thumb_up</i>
+					</a>
+					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top"
+						title="Click to update this review" href="{{url_for('edit_review', review_id=review._id)}}">
+						<i class="material-icons">add</i>
+					</a>
+					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top"
+						title="Click to delete this review" href="{{url_for('delete_review', review_id=review._id)}}">
+						<i class="material-icons">delete</i>
+					</a>
+				</div>
+			</div>
 		</div>
+		{% endfor %}
 	</div>
 </div>
-{% endfor %}
+
+
 {% endblock %}

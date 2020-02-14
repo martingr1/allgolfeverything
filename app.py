@@ -111,8 +111,9 @@ def add_review():
 def get_reviews():
     
     if 'user' in session: # Check if the user is logged in.
-        reviews = mongo.db.reviews.find().sort("_id", -1).limit(5) # If they are, display the top 5 newest reviews.
+        reviews = mongo.db.reviews.find().sort("_id", -1).limit(10) # If they are, display the top 5 newest reviews.
         return render_template("reviews.html", reviews=reviews, category=mongo.db.category.find().sort("_id", -1), brands=mongo.db.brands.find())
+        (print())    
     else:
         flash("You must be logged in to do this!") #If they aren't, send them to the login page.
         return render_template("login.html")

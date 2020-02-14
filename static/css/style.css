@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-.icon-wrapper {
-    text-align: center;
-}
 .main-icons {
     font-size: 100px;
     padding: 25% 50px 10px;
@@ -10,18 +7,12 @@
 }
 
 .jumbotron {
-    background-color: rgba(0,0,0,0)
-}
-.wrapper-heading {
-    font-size: 50px;
-    font-weight: 700;
-    text-align: center;
+    background-image: url("/static/images/turnberry.jpg");
+    background-position: 50% 50%;
 }
 
-.intro {
-    padding: 2%;
-    margin: 10px;
-    color: #2f4f4f;
+.main-card {
+    color: #D7E5E4;
 }
 
 .intro-light {
@@ -44,25 +35,23 @@ margin-left: 4px;
 
 .btn{
 color: white;
-background-color:#228B22;
-border-color: #228B22;
+background-color: #2F7320;
+border-color: #2F7320;
 width: 150px;
 height: 40px;
 padding: 5px;
 }
 
 .btn:hover{
-color: black;
+color: #2F7320;
 background-color: white;
-border-color: #228B22;
+border-color:#2F7320;
 }
 
 .card{
 opacity: 0.9;
-height: 370px;
 margin-top: 5%;
 margin-bottom: auto;
-width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
@@ -84,14 +73,6 @@ color: whitesmoke;
     margin: auto;
     padding: .5%;
     font-size: 15px;
-}
-
-.default-image{
-    height: 125px;
-    width: 100px;
-    border-radius: 15%;
-    margin: 1%;
-    padding: 1%;
 }
 
 .edit-text {
@@ -136,8 +117,8 @@ color: whitesmoke;
 }
 
 .affiliate-img {
-    height: 30px;
-    width: 80px;
+    height: 40px;
+    width: 120px;
     padding: 2px;
 }
 
@@ -173,4 +154,28 @@ color: whitesmoke;
 color: rgb(121, 120, 120);
 background-color: white;
 border-color: rgb(121, 120, 120)
+}
+
+.btn-cancel-white {
+    color: black;
+    background-color:whitesmoke);
+    border-color: black;
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+}
+
+.btn-cancel-white:hover{
+color: rgb(121, 120, 120);
+background-color: white;
+border-color: rgb(121, 120, 120)
+}
+
+.card-deck {
+    margin: 0;
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: 23vh;
 }
