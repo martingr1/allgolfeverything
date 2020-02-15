@@ -50,8 +50,16 @@ border-color:#2F7320;
 
 .card{
 opacity: 0.9;
-margin-top: 5%;
-margin-bottom: auto;
+margin: 5%;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.form-inline {
+    margin: 1%;
+}
+
+.write-card{
+opacity: 0.9;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
@@ -97,28 +105,31 @@ color: whitesmoke;
 }
 
 .filters {
+    min-width: 200px;
     max-width: 300px;
     padding-left: 5px;
     padding-right: 5px;
-    margin: 0 auto;
+    margin: 5px;
 }
 
 .write-filters {
+    min-width: 300px;
+    max-width: 600px;
     padding-left: 5px;
     padding-right: 5px;
     margin: 0 auto;
 }
 
 .filters-btn {
-    max-width: 300px;
+    max-width: 250px;
     padding-left: 5px;
     padding-right: 5px;
     margin-bottom: 10px;
 }
 
 .affiliate-img {
-    height: 40px;
-    width: 120px;
+    height: 50px;
+    width: 160px;
     padding: 2px;
 }
 
@@ -130,6 +141,11 @@ color: whitesmoke;
     border-style: solid;
     border-color: white;
     margin: 1%;
+}
+
+.like-text {
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .login-icon {
@@ -177,5 +193,5 @@ border-color: rgb(121, 120, 120)
 
 .card-img-top {
     max-width: 100%;
-    height: 23vh;
+    height: 30vh;
 }

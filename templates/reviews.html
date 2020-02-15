@@ -15,38 +15,44 @@
 </div>
 
 
-
-<form class="form-inline" action="{{url_for('filter_reviews')}}" method="POST">
-	<label for="Choose Category"></label>
-	<select class ="form-control filters" id="category" name="category_name">
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-xs-12">
+			<div class="card text-white bg-dark ">
+				<form class="form-inline justify-content-center" action="{{url_for('filter_reviews')}}" method="POST">
+					<label for="Choose Category"></label>
+					<select class ="form-control filters" id="category" name="category_name">
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                             {% endfor %}
                             </select>
-	<label for="Choose Brand"></label>
-	<select class = "form-control filters" id="brand" name="brand_name">
+					<label for="Choose Brand"></label>
+					<select class = "form-control filters" id="brand" name="brand_name">
                             <option value="" disabled selected>Choose Brand</option>
                             {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                             {% endfor %}
                             </select>
-	<button class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter
+					<button class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to apply filters" type="submit">Filter
                     </button>
 
-	<a class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
-		href="{{url_for('get_reviews')}}">Reset
-		Filters
-	</a>
-</form>
-
+					<a class="btn filters" data-toggle="tooltip" data-placement="top" title="Click to reset filters"
+						href="{{url_for('get_reviews')}}">Reset
+						Filters
+					</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 <div class="container">
 	<div class="row">
 		{% for review in reviews %}
 		<div class="card-deck col-xs-12 col-md-6">
-			<div class="card text-white bg-dark "> 
+			<div class="card text-white bg-dark ">
 				<img class="card-img-top img-fluid default-image" src="{{review.image_url}}" alt="Product image">
 				<div class="row review-text">
 					<a class="" data-toggle="tooltip" data-placement="top"
@@ -66,17 +72,17 @@
 					<div class="row review-text lead">Model: {{review.model_name}} </div>
 				</div>
 				<div class="card-body">
-					<p class="card-text">{{review.review_text}}</p>
-					<p class="review-text lead">{{review.upvote}} Like(s)</p>
+					<p class="review-text lead">{{review.review_text}}</p>
+					
 				</div>
-				<div class="card-footer">
+				<div class="card-footer"><p class="review-text like-text lead">{{review.upvote}} Like(s)</p>
 					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top" title="Click to like!"
 						href="{{url_for('upvoted', review_id=review._id)}} ">
 						<i class="material-icons">thumb_up</i>
 					</a>
 					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top"
 						title="Click to update this review" href="{{url_for('edit_review', review_id=review._id)}}">
-						<i class="material-icons">add</i>
+						<i class="material-icons">create</i>
 					</a>
 					<a class="btn rev-btn" data-toggle="tooltip" data-placement="top"
 						title="Click to delete this review" href="{{url_for('delete_review', review_id=review._id)}}">
