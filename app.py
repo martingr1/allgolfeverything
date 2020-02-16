@@ -199,9 +199,9 @@ def delete_review(review_id):
         the_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
         the_author = the_review['author'] #If they are, check if their user session name matches the author name of the document they
                                 #are trying to delete.
-        
         if user == the_author:
-            mongo.db.reviews.remove({"_id": ObjectId(review_id)}) #If it does, delete the document and show message.
+            
+            mongo.db.reviews.delete_one({"_id": ObjectId(review_id)}) #If it does, delete the document and show message.
             flash("Review deleted")
             return redirect(url_for('get_reviews'))#Redirect to reviews.
 
