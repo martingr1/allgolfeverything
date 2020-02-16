@@ -53,11 +53,11 @@
 		{% for review in reviews %}
 		<div class="card-deck col-xs-12 col-md-6">
 			<div class="card text-white bg-dark ">
-				<img class="card-img-top img-fluid default-image" src="{{review.image_url}}" alt="Product image">
+				<img class="card-img-top img-fluid default-image" src="{{review.image_url}}" onerror="this.src='/static/images/golf_background.jpg';" alt="Product image">
 				<div class="row review-text">
 					<a class="" data-toggle="tooltip" data-placement="top"
 						title="Click to see this item on American Golf"
-						href="https://www.americangolf.co.uk/{{review.brand_name}}-golf" target="_blank">
+						href="https://www.americangolf.co.uk/{{review.brand_name}}" target="_blank">
 						<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
 			</a>
 				</div>
