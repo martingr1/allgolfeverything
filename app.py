@@ -176,9 +176,9 @@ def edit_review(review_id):
         if user == the_author: #If they are, check if their user session name matches the author name of the document they
                                 #are trying to edit. If it does, render the editreview template.
        
-            all_categories = mongo.db.category.find() 
-            all_brands = mongo.db.brands.find()
-            all_models = mongo.db.models.find()
+            all_categories = mongo.db.category.find().sort("category_name", 1) 
+            all_brands = mongo.db.brands.find().sort("brand_name", 1)
+            all_models = mongo.db.models.find().sort("model_name", 1)
             all_text = mongo.db.reviews.review_text.find()
         
             all_images = mongo.db.reviews.image_url.find()
