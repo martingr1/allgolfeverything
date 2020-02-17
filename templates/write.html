@@ -14,82 +14,83 @@
 	</div>
 </div>
 <div class="container">
-	<div class="row justify-content-center">
+	<div class="row no-gutters justify-content-center">
 		<div class="col-xs-12">
-			<div class="write-card text-white bg-dark ">
-				<form class="form-group" action="/insert_review"  method="POST">
-					<div class="form-group write-filters">
-						<label for="exampleFormControlTextarea1"></label>
-						<textarea name="review_title" class="form-control" placeholder="Give your review a title here" id="exampleFormControlTextarea1" rows="1" required></textarea>
-					</div>
-					<div class="form-group write-filters">
-						<label for="Choose Category"></label>
-						<select class = "form-control" id="category" name="category_name">
+			<div class="card text-white bg-dark">
+				<div class="lead card-header">Write a review<i class="material-icons btn-icon float-right">
+                            edit</i></div>
+				<div class="card-body">
+					<form class="form-group" action="/insert_review" method="POST">
+						<div class="row no-gutters">
+							<label class="lead" for="Title">Title</label>
+							<textarea name="review_title" class="form-control" placeholder="Give your review a title here" id="exampleFormControlTextarea1" rows="1" required></textarea>
+						</div>
+						<div class="row no-gutters">
+							<label class="lead" for="Choose Category">Category</label>
+							<select class = "form-control" id="category" name="category_name">
        <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
                     {% endfor %}
     </select>
-					</div>
-					<div class="form-group write-filters">
-						<label for="Choose Brand"></label>
-						<select class = "form-control" id="brand" name="brand_name">
+						</div>
+						<div class="row no-gutters">
+							<label class="lead" for="Choose Brand">Brand</label>
+							<select class = "form-control" id="brand" name="brand_name">
         <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
                     {% endfor %}
     </select><a class="btn filters" data-toggle="modal" href="#brandmodal">Add Brand
-						</a>
-					</div>
-					<div class="form-group col write-filters">
-						<label for="Choose Model"></label>
-						<select class = "form-control" id="model" name="model_name">
+							</a>
+						</div>
+						<div class="row no-gutters">
+							<label class="lead" for="Choose Model">Model</label>
+							<select class = "form-control" id="model" name="model_name">
         <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
                         <option value="{{models.model_name}}">{{models.model_name}}</option>
                     {% endfor %}
                 </select>
-						<a class="btn filters" data-toggle="modal" href="#modelmodal">Add Model
-							<i class="material-icons"></i>
-						</a>
-					</div>
-					<div class="form-group col write-filters">
-						<label for="Choose Model"></label>
-						<select class = "form-control" id="score" name="score">
+							<a class="btn filters" data-toggle="modal" href="#modelmodal">Add Model
+								<i class="material-icons"></i>
+							</a>
+						</div>
+						<div class="row no-gutters">
+							<label class="lead" for="Score">Score</label>
+							<select class = "form-control" id="score" name="score">
         <option value="" disabled selected>Score</option>
                 {% for score in score %}      
                         <option value="{{score.score}}">{{score.score}}</option>
                     {% endfor %}
                 </select>
-					</div>
-					<div class="form-group col write-filters">
-						<label for="exampleFormControlTextarea1"></label>
-						<textarea name="review_text" placeholder="Write your review here" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-					</div>
-					<label for="basic-url"></label>
-					<div class="input-group mb-3 col write-filters">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3">URL</span>
 						</div>
-						<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-</div>
-						<div class="">
-							<input id="review_text" name="upvote"  type="hidden" value ="0" class="form-control" readonly></input>
+						<div class="row no-gutters">
+							<label class="lead" for="Review Text">Contents & Image</label>
+							<textarea name="review_text" placeholder="Write your review here" class="form-control" id="review_text" rows="5"></textarea>
+							<label for="basic-url"></label>
 						</div>
-						<div class="form-group write-filters col">
+						<div class="row no-gutters">
+							<div class="input-group mb-3 col">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon3">URL</span>
+								</div>
+								<input type="text" name="image_url" class="form-control" id="basic-url" aria-describedby="image url">
+                            </div>
+							</div>
+							<input id="upvote" name="upvote"  type="hidden" value ="0" class="form-control" readonly></input>
+
 							<button class="btn d-flex align-items-center" type="submit">Submit Review</i><i class="material-icons btn-icon">
-send
-</i>
+                            send</i>
                 </button>
-						</div>
-					</div>
+					</form>
+				</div>
 			</div>
-			</form>
 		</div>
 	</div>
 </div>
 
-<div class="modal" id="brandmodal" tabindex="-1" role="dialog" aria-labelledby="brandmodal" aria-hidden="true">
+<div class="modal fade" id="brandmodal" tabindex="-1" role="dialog" aria-labelledby="brandmodal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -117,7 +118,7 @@ send
 	</div>
 </div>
 
-<div class="modal" id="modelmodal" tabindex="-1" role="dialog" aria-labelledby="modelmodal" aria-hidden="true">
+<div class="modal fade" id="modelmodal" tabindex="-1" role="dialog" aria-labelledby="modelmodal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

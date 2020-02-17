@@ -42,12 +42,39 @@ height: 40px;
 padding: 5px;
 }
 
+.rev-btn {
+    height: 42px;
+    width: 50px;
+    padding: 10px%;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.del-btn{
+color: white;
+background-color: #D48E00;
+border-color: #D48E00;
+width: 150px;
+height: 40px;
+padding: 5px;
+}
+
+.rev-btn-del {
+    height: 42px;
+    width: 50px;
+    padding: 10px%;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
 .btn:hover{
 color: #2F7320;
 background-color: white;
 border-color:#2F7320;
 }
 
+.no-gutters {
+    margin-bottom: 2%;
+}
 .card{
 opacity: 0.9;
 margin: 5%;
@@ -61,6 +88,11 @@ background-color: rgba(0,0,0,0.5) !important;
 .write-card{
 opacity: 0.9;
 background-color: rgba(0,0,0,0.5) !important;
+width: 75vw;
+}
+
+.write-form {
+width: 70vw;
 }
 
 .review-card{
@@ -96,13 +128,7 @@ color: whitesmoke;
     color: whitesmoke;
 }
 
-.rev-btn {
-    height: 42px;
-    width: 50px;
-    padding: 10px%;
-    margin-bottom: 5px;
-    margin-left: 5px;
-}
+
 
 .filters {
     min-width: 200px;
@@ -112,13 +138,7 @@ color: whitesmoke;
     margin: 5px;
 }
 
-.write-filters {
-    min-width: 300px;
-    max-width: 600px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin: 0 auto;
-}
+
 
 .filters-btn {
     max-width: 250px;
