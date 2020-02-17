@@ -2,9 +2,9 @@
 {% block content%}
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="card">
+		<div class="card text-white bg-dark ">
 			<div class="card-header">
-				<h3>Register</h3>
+				<h3 class="display-4">Register</h3>
 			</div>
 			<div class="card-body">
 				<form action="{{ url_for('register') }}" method="POST">
@@ -21,14 +21,14 @@
 							</div>
 							<input type="password" name = "password" class="form-control" placeholder="password">
 					</div>
-								<div class="form-group">
-									<input type="submit" value="Register" class="btn float-left login_btn">
-					</div>
+							<div class="form-group">
+								<button type="submit" value="Login" class="btn float-left login_btn">Register</button>
+							</div>
 				</form>
 			</div>
 			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Want to go back?<a href="{{ url_for('get_index') }}"> Click here to return</a>
+				<div class="row d-flex no-gutters">
+					<a href="{{ url_for('get_index') }}">Return to main page</a>
 				</div>
 			</div>
 		</div>
