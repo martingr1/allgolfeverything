@@ -221,8 +221,8 @@ def delete_review(review_id):
 def filter_reviews():
 
     query = {} #create a query variable to pass to mongo and search the db
-    all_categories = mongo.db.category.find()
-    all_brands = mongo.db.brands.find()
+    all_categories = mongo.db.category.find().sort("category_name", 1) 
+    all_brands = mongo.db.brands.find().sort("brand_name", 1) 
     brands = request.form.get("brand_name")#get the value from brand input
     categories = request.form.get("category_name")#get the value from category input
     

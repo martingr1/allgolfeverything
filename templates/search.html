@@ -1,36 +1,47 @@
 {% extends "base.html" %}
 {% block content%}
-<section class="main">
-	<div class="jumbotron main-image">
-		<div class="container">
+<div class="jumbotron">
+	<div class="container">
+		<div class="card main-card">
 			<h1 class="display-4">Quick Search Results</h1>
 			<p class="lead">Your quick search summary results are below</p>
-			<hr class="my-4">
-			<p>Here you can read a brief summary of a review left by a community member.
-            Please navigate to the reviews section and filter by category to interact with any results.
+			<p class="lead">Here you can read a brief summary of a review left by a community member.
+				Please navigate to the reviews section and filter by category to interact with any results.
 			</p>
 		</div>
 	</div>
-</section>
-{% if results %}
-{% for r in results %}
-<div class="review-card col-sm-12">
-	<img class= "default-image" src="static/images/golf_image.jpg" alt="default image">
-	<div class="row review-text"><strong>{{r.review_title}}</strong></div>
-	<div class="row review-text">Rating (out of 5): {{r.score}}</div>
-	<div class="row review-text"><a class="btn-floating btn-large waves-effect waves-light yellow"
-			href="{{r.image_url}}" target="_blank">Click for image
-			<i class="material-icons">refresh</i>
-		</a></div>
-	<div class="row review-text"><strong>Category: </strong> {{r.category_name}}</div>
-	<div class="row review-text"><strong>Brand: </strong> {{r.brand_name}}</div>
-	<div class="row review-text"><strong>Model: </strong> {{r.model_name}}</div>
-	<div class="row review-text">{{r.review_text}}</div>
-	<div class="row review-text">{{r.upvote}} Like(s)</div>
-	<hr class="my-4">
-	<div class="col-xs-12">
-    {% endfor %}
-	{% endif %}
-	</div>
 </div>
-{% endblock %}
+{% if results %}
+<div class="container">
+	<div class="row">
+		{% for r in results %}
+		<div class="card-deck col-xs-12 col-md-6">
+			<div class="card text-white bg-dark ">
+				<img class="card-img-top img-fluid default-image" src="{{r.image_url}}" onerror="this.src='/static/images/golf_background.jpg';" alt="Product image">
+				<div class="row review-text">
+					<a class="" data-toggle="tooltip" data-placement="top"
+						title="Click to see this item on American Golf"
+						href="https://www.americangolf.co.uk/{{r.brand_name}}" target="_blank">
+						<img class="affiliate-img" src="static/images/am_golf_logo_default.jpg" alt="am-golf-logo">
+			</a>
+				</div>
+				<div class="card-header">
+					<div class="card-title">
+						<h5 class="lead">{{r.review_title}}</h5>
+					</div>
+					<div class="row review-text lead">Reviewed by {{r.author}}</div>
+					<div class="row review-text lead">Rating (out of 5): {{r.score}}</div>
+					<div class="row review-text lead">Category: {{r.category_name}}</div>
+					<div class="row review-text lead">Brand: {{r.brand_name}}</div>
+					<div class="row review-text lead">Model: {{r.model_name}} </div>
+				</div>
+				<div class="card-body">
+					<p class="review-text lead">{{r.review_text}}</p>
+
+				</div>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endblock %}
