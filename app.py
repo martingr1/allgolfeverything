@@ -72,20 +72,19 @@ def register():
         if existing_user is None: #if user doesn't exist, get the password from the form
             username = request.form.get('username')
             password = request.form.get('password')
-            if username:
+            if username: #check for an entry in username field
                 if password: #if there is an entry in the password field, encrypt it and submit to db
                     securepass = generate_password_hash(password)
                     users.insert_one({'username': request.form.get(
                         'username'), 'password': securepass})
-                    #session['username'] = request.form.get('username')
                     flash('Thank you for registering with All Golf Everything, please login')
                     return redirect(url_for('login'))
                 else:
                     flash('You cannot have a blank password') #if password is blank, display message and redirect to
                     return redirect(url_for('register'))        #register template
             else:
-                flash('You cannot have a blank username')
-                return redirect(url_for('register')) 
+                flash('You cannot have a blank username') #if blank in username field, display message
+                return redirect(url_for('register')) #anmd redirect to register template
         else:
             flash("That username already exists!")#if username already in users, display message and
             return redirect(url_for('register'))# redirect to register template

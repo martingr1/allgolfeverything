@@ -27,8 +27,11 @@
 					Account
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if session.user %}
+                <a class="dropdown-item" href="{{url_for('logout')}}">Log Out</a>
+                {% else %}
 					<a class="dropdown-item" href="{{url_for('login')}}">Log In</a>
-					<a class="dropdown-item" href="{{url_for('logout')}}">Log Out</a>
+				{% endif %}	
 				</div>
 			</li>
 		</ul>

@@ -9,9 +9,11 @@
 				start
 				contributing.
 			</p>
-			<p>
+			<p>{% if session.user %}
+                {% else %}
 				<a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
 				<a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Sign Up</a>
+                {% endif %}
 			</p>
 		</div>
 </div>
