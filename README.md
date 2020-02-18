@@ -44,9 +44,7 @@ Project Design
 
 The project criteria specified that MongoDB be used as the database for the project, principally through MongoDB Atlas.
 
-![alt text][db]
-
-[db]: https://github.com/martingr1/allgolfeverything/static/images/database_model.pdf "Databse Model"
+[![Database Model](/martingr1/allgolfeverything/static/images/database_model.jpg "DB model")()
 
 After consideration and some testing, the above databse model was decided upon. This gave a suitably flexible structure to be able to allow users to Create, Read, 
 Update and Delete review documents in their own collection; whilst also being able to select and (in some cases) amend other key value pairs without affecting the review itself.
@@ -85,9 +83,7 @@ My main design philosophies were:
 4. Green, Grey, Yellow colour scheme to fit with golfing theme.
 5. Help users get to what they want in as few clicks as possible.
 
-![alt text][ux]
-
-[ux]:/static/images/login_review.pdf "UX Design"
+[![Database Model](/martingr1/allgolfeverything/static/images/login_review.jpg "DB model")()
 
 ## User stories 
 
@@ -191,7 +187,7 @@ The project was tested manually across 3 categories:
 2. CRUD
 3. Defensive
 
-Please see the results of testing [here](https://github.com/martingr1/allgolfeverything/static/images/testing.pdf)
+Please see the results of testing [here](/static/images/testing.pdf)
 
 Bugs and Acknowledgements 
 =====
