@@ -89,7 +89,7 @@ My main design philosophies were:
 
 1. Display information as simply and clearly as possible.
 2. Display only relevant information to users.
-3. Mobile f
+3. Mobile first
 4. Green, Grey, Yellow colour scheme to fit with golfing theme.
 5. Help users get to what they want in as few clicks as possible.
 

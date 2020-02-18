@@ -2,11 +2,15 @@
 
 <head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 	<a class="navbar-brand" href="{{url_for('get_index')}}">All Golf Everything</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,11 +31,11 @@
 					Account
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% if session.user %}
-                <a class="dropdown-item" href="{{url_for('logout')}}">Log Out</a>
-                {% else %}
+					{% if session.user %}
+					<a class="dropdown-item" href="{{url_for('logout')}}">Log Out</a>
+					{% else %}
 					<a class="dropdown-item" href="{{url_for('login')}}">Log In</a>
-				{% endif %}	
+					{% endif %}
 				</div>
 			</li>
 		</ul>
@@ -49,10 +53,10 @@
 </nav>
 
 <body>
-<style>
-    body {
-        background-color: #636363;
-    }
+	<style>
+		body {
+			background-color: #636363;
+		}
 	</style>
 	<header>
 		<div class="container-fluid">
@@ -83,12 +87,29 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 	</script>
+	<script src="https://kit.fontawesome.com/8d3ffc87d8.js" crossorigin="anonymous"></script>
 	<script>
 		$(function () {
   
     $('[data-toggle="tooltip"]').tooltip()
 })
 	</script>
+	<footer class="footer">
+		<nav class="text-muted">
+			<div class="container">
+				<div class="row justify-content-center">
+					<span class="lead">All Golf Everything</span>
+				</div>
+				<div class="row justify-content-center">
+					<span class="lead"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i></span>
+				</div>
+				<div class="row justify-content-center">
+					<span class="lead">&copy; Martin Russell 2020 <a href="https://github.com/martingr1/allgolfeverything"><i class="fab fa-github"></i></a></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+	</footer>
 </body>
 
 </html>
