@@ -1,3 +1,5 @@
+[!Banner](/static/images/banner.jpg "Banner")
+
 All Golf Everything
 ====== 
 
@@ -9,6 +11,15 @@ share information on golf related gear and generally keep informed of new develo
 
 Rather than relying solely on reviews from editors or journalists, All Golf is aimed at providing an open sharing platform
 for amateur golfers to share their honest opinions on experiences they've had with particular products.
+
+Deployment
+
+======
+
+The app is deployed to Heroku and can be accessed [here](https://allgolfeverything.herokuapp.com/)
+
+Version control is implemented in git.
+
 
 Project Criteria
 =====
@@ -44,11 +55,7 @@ Project Design
 
 The project criteria specified that MongoDB be used as the database for the project, principally through MongoDB Atlas.
 
-<<<<<<< HEAD
 [!Database Model](/static/images/database_model.jpg "DB model")
-=======
-[![Database Model](/static/images/database_model.jpg "DB model")
->>>>>>> 01e885e9956e25a04505e04b99a070ef5b8edbaf
 
 After consideration and some testing, the above databse model was decided upon. This gave a suitably flexible structure to be able to allow users to Create, Read, 
 Update and Delete review documents in their own collection; whilst also being able to select and (in some cases) amend other key value pairs without affecting the review itself.
@@ -58,7 +65,7 @@ used to create a like function.
 
 ## Indexing
 
-There is one text index on the databse that allows users to search across title, category, brand or model.
+There is one text index on the database that allows users to search across title, category, brand or model.
 
 ## Back End
 
@@ -83,15 +90,11 @@ My main design philosophies were:
 
 1. Display information as simply and clearly as possible.
 2. Display only relevant information to users.
-3. Mobile first.
+3. Mobile f
 4. Green, Grey, Yellow colour scheme to fit with golfing theme.
 5. Help users get to what they want in as few clicks as possible.
 
-<<<<<<< HEAD
-[!Login and review](/static/images/login_review.jpg "Login and review")
-=======
-[![Login and Review Mockups](/static/images/login_review.jpg "Login/Review Mockups")
->>>>>>> 01e885e9956e25a04505e04b99a070ef5b8edbaf
+[!Login and Review Mockups](/static/images/login_review.jpg "Login/Review Mockups")
 
 ## User stories 
 
@@ -197,5 +200,33 @@ The project was tested manually across 3 categories:
 
 Please see the results of testing [here](/static/images/testing.pdf)
 
-Bugs and Acknowledgements 
+Responsiveness was tested on Apple iPhone X, iPad, Samsung Galaxy S8 and Apple iPhone 5s. 
+
+Acknowledgements 
 =====
+
+For additional functionality beyond the lesson code, the following proved very useful resources throughout the development process.
+
+[Flask Login - Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&t=2519s)
+[Flask Messaging - Pretty Printed](https://www.youtube.com/watch?v=DFCKWhoiHZ4)
+[Flask Security- Pretty Printed](https://www.youtube.com/watch?v=LsHf3JSDBVc&t=622s)
+[MongoDB - Kristina Chodorow](https://www.amazon.co.uk/Kristina-Chodorow-MongoDB-Definitive-Guide/dp/B00HTJQQ9O/ref=sr_1_4?keywords=mongodb+kristina&qid=1582035158&s=digital-text&sr=1-4-catcorr)
+[MongoDB Tutorial - Coding Simplified](https://www.youtube.com/watch?v=pQeiXM1-Upw&t=2s)
+[Stack Overflow](https://stackoverflow.com/)
+[Python Query Filters - Pretty Printed](https://www.youtube.com/watch?v=D5l5Gf7PoJA&t=298s)
+[Python - Timothy Needham](https://www.amazon.co.uk/Python-Beginners-programming-web-programming-programmer-ebook/dp/B075JGW5YK)
+
+In general, the Code Institute Slack channel has been an invaluable resource. In addition, thanks are owed to the CI tutors
+for their patience in helping me solve coding problems and encouraging me to find answers to issues.
+
+Future Features
+=====
+
+As the site grows, it will be necessary to implement some new features not included in the scope of this project.
+
+The list below is not exhaustive and will be added to over time in order to keep the site viable.
+
+1. Password retrieval and reset function.
+2. User Profiles.
+3. Image hosting.
+4. Fully functioning affiliate links.
