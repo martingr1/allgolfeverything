@@ -77,7 +77,7 @@
 
 	{% block content %}
 	{% endblock %}
-
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 	</script>
@@ -94,22 +94,25 @@
     $('[data-toggle="tooltip"]').tooltip()
 })
 	</script>
-	<footer class="footer">
-		<nav class="text-muted">
+<hr class="my-5">
+	<footer class="footer d-flex flex-column">
+
+		<nav class="text-muted bg-dark text-white">
 			<div class="container">
 				<div class="row justify-content-center">
 					<span class="lead">All Golf Everything</span>
 				</div>
 				<div class="row justify-content-center">
-					<span class="lead"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i></span>
+					<span class="lead links"><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i></span>
 				</div>
 				<div class="row justify-content-center">
-					<span class="lead">&copy; Martin Russell 2020 <a href="https://github.com/martingr1/allgolfeverything"><i class="fab fa-github"></i></a></span>
+					<span class="lead">&copy; Martin Russell 2020 <a href="https://github.com/martingr1/allgolfeverything"><i class="links fab fa-github"></i></a></span>
 					<span></span>
 				</div>
 			</div>
 		</nav>
 	</footer>
+
 </body>
 
 </html>

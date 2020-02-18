@@ -20,11 +20,7 @@
 }
 
 .links{
-color: black;
-}
-
-.links a{
-margin-left: 4px;
+color: whitesmoke;
 }
 
 .btn{
@@ -44,22 +40,6 @@ margin: 5px;
     margin-bottom: 5px;
     margin-left: 5px;
 }
-.del-btn{
-color: white;
-background-color: #D48E00;
-border-color: #D48E00;
-width: 150px;
-height: 40px;
-padding: 5px;
-}
-
-.rev-btn-del {
-    height: 42px;
-    width: 50px;
-    padding: 10px%;
-    margin-bottom: 5px;
-    margin-left: 5px;
-}
 
 .btn:hover{
 color: #2F7320;
@@ -70,6 +50,7 @@ border-color:#2F7320;
 .no-gutters {
     margin-bottom: 2%;
 }
+
 .card{
 opacity: 0.9;
 margin: 5%;
@@ -78,16 +59,6 @@ background-color: rgba(0,0,0,0.5) !important;
 
 .form-inline {
     margin: 1%;
-}
-
-.write-card{
-opacity: 0.9;
-background-color: rgba(0,0,0,0.5) !important;
-width: 75vw;
-}
-
-.write-form {
-width: 70vw;
 }
 
 .review-card{
@@ -204,16 +175,18 @@ border-color: rgb(121, 120, 120)
 }
 
 .fab {
-
 margin-left: 5px;
 margin-right: 5px;
-
 }
 
 .footer {
-  position: relative;
-  width: 100%;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  background-color: #636363;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+html { position: relative; min-height: 100%; }
+
+.my-5 {
+    border-color: #636363;
 }
