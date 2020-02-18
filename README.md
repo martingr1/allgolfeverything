@@ -1,4 +1,4 @@
-[!Banner](/static/images/banner.jpg "Banner")
+![Banner](/static/images/banner.jpg "Banner")
 
 All Golf Everything
 ====== 
@@ -13,7 +13,6 @@ Rather than relying solely on reviews from editors or journalists, All Golf is a
 for amateur golfers to share their honest opinions on experiences they've had with particular products.
 
 Deployment
-
 ======
 
 The app is deployed to Heroku and can be accessed [here](https://allgolfeverything.herokuapp.com/)
@@ -27,22 +26,22 @@ Project Criteria
 The below criteria were set out by Code Institute as an example project outline to follow. As an avid golfer I wanted to put my own twist on these
 and create something for which I believe there is a genuine need for in the market. 
 
-## Project Example Idea
+### Project Example Idea
 Build a book review and recommendation site.
 
-## External user’s goal:
+### External user’s goal:
 Find books they would like to read.
 
-## Site owner's goal:
+### Site owner's goal:
 Earn money on each book purchased via a link from the site.
 
-## Potential features to include:
+### Potential features to include:
 Create a web application that allows users to upload details of books, including book name, author name, link to cover image and any other relevant fields. 
 Allow users to write comments about any book and upvote it.
 
-## Create the backend code and frontend form(s) to allow users to add new books and reviews to the site, edit them and delete them.
+Create the backend code and frontend form(s) to allow users to add new books and reviews to the site, edit them and delete them.
 
-## Advanced potential feature (nice-to-have):
+### Advanced potential feature (nice-to-have):
 Add a link such as the following to each book page, such that you could conceivably earn money from people looking to buy the book: https://www.amazon.com/s?tag=faketag&k=alice+in+wonderland 
 Note that we do not actually encourage you to create an affiliate link, but rather want to demonstrate how this could work. 
 Instead, for this project, we encourage you to just keep the tag value as something fake. 
@@ -55,7 +54,7 @@ Project Design
 
 The project criteria specified that MongoDB be used as the database for the project, principally through MongoDB Atlas.
 
-[!Database Model](/static/images/database_model.jpg "DB model")
+![Database Model](/static/images/database_model.jpg "DB model")
 
 After consideration and some testing, the above databse model was decided upon. This gave a suitably flexible structure to be able to allow users to Create, Read, 
 Update and Delete review documents in their own collection; whilst also being able to select and (in some cases) amend other key value pairs without affecting the review itself.
@@ -94,7 +93,7 @@ My main design philosophies were:
 4. Green, Grey, Yellow colour scheme to fit with golfing theme.
 5. Help users get to what they want in as few clicks as possible.
 
-[!Login and Review Mockups](/static/images/login_review.jpg "Login/Review Mockups")
+![Login and Review Mockups](/static/images/login_review.jpg "Login/Review Mockups")
 
 ## User stories 
 
@@ -207,14 +206,14 @@ Acknowledgements
 
 For additional functionality beyond the lesson code, the following proved very useful resources throughout the development process.
 
-[Flask Login - Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&t=2519s)
-[Flask Messaging - Pretty Printed](https://www.youtube.com/watch?v=DFCKWhoiHZ4)
-[Flask Security- Pretty Printed](https://www.youtube.com/watch?v=LsHf3JSDBVc&t=622s)
-[MongoDB - Kristina Chodorow](https://www.amazon.co.uk/Kristina-Chodorow-MongoDB-Definitive-Guide/dp/B00HTJQQ9O/ref=sr_1_4?keywords=mongodb+kristina&qid=1582035158&s=digital-text&sr=1-4-catcorr)
-[MongoDB Tutorial - Coding Simplified](https://www.youtube.com/watch?v=pQeiXM1-Upw&t=2s)
-[Stack Overflow](https://stackoverflow.com/)
-[Python Query Filters - Pretty Printed](https://www.youtube.com/watch?v=D5l5Gf7PoJA&t=298s)
-[Python - Timothy Needham](https://www.amazon.co.uk/Python-Beginners-programming-web-programming-programmer-ebook/dp/B075JGW5YK)
+1. [Flask Login - Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&t=2519s)
+2. [Flask Messaging - Pretty Printed](https://www.youtube.com/watch?v=DFCKWhoiHZ4)
+3. [Flask Security- Pretty Printed](https://www.youtube.com/watch?v=LsHf3JSDBVc&t=622s)
+4. [MongoDB - Kristina Chodorow](https://www.amazon.co.uk/Kristina-Chodorow-MongoDB-Definitive-Guide/dp/B00HTJQQ9O/ref=sr_1_4?keywords=mongodb+kristina&qid=1582035158&s=digital-text&sr=1-4-catcorr)
+5. [MongoDB Tutorial - Coding Simplified](https://www.youtube.com/watch?v=pQeiXM1-Upw&t=2s)
+6. [Stack Overflow](https://stackoverflow.com/)
+7. [Python Query Filters - Pretty Printed](https://www.youtube.com/watch?v=D5l5Gf7PoJA&t=298s)
+8. [Python - Timothy Needham](https://www.amazon.co.uk/Python-Beginners-programming-web-programming-programmer-ebook/dp/B075JGW5YK)
 
 In general, the Code Institute Slack channel has been an invaluable resource. In addition, thanks are owed to the CI tutors
 for their patience in helping me solve coding problems and encouraging me to find answers to issues.
