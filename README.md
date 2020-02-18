@@ -44,7 +44,7 @@ Project Design
 
 The project criteria specified that MongoDB be used as the database for the project, principally through MongoDB Atlas.
 
-[![Database Model](/martingr1/allgolfeverything/static/images/database_model.jpg "DB model")()
+[![Database Model](/static/images/database_model.jpg "DB model")
 
 After consideration and some testing, the above databse model was decided upon. This gave a suitably flexible structure to be able to allow users to Create, Read, 
 Update and Delete review documents in their own collection; whilst also being able to select and (in some cases) amend other key value pairs without affecting the review itself.
