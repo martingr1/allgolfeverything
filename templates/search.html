@@ -11,6 +11,7 @@
 		</div>
 	</div>
 </div>
+<!-- Search Results Section -->
 {% if results %}
 <div class="container">
 	<div class="row">
@@ -37,11 +38,11 @@
 				</div>
 				<div class="card-body">
 					<p class="review-text lead">{{r.review_text}}</p>
-
 				</div>
-				{% endfor %}
-				{% endif %}
 			</div>
 		</div>
+		{% endfor %}
+		{% endif %}
 	</div>
-	{% endblock %}
+</div>
+{% endblock %}
