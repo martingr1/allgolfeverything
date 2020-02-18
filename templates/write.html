@@ -27,7 +27,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Category">Category</label>
-							<select class = "form-control" id="category" name="category_name">
+							<select class = "form-control" id="category" name="category_name" required>
        <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                         <option value="{{category.category_name}}">{{category.category_name}}</option>
@@ -36,7 +36,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Brand">Brand</label>
-							<select class = "form-control" id="brand" name="brand_name">
+							<select class = "form-control" id="brand" name="brand_name" required>
         <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}      
                         <option value="{{brands.brand_name}}">{{brands.brand_name}}</option>
@@ -46,7 +46,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Model">Model</label>
-							<select class = "form-control" id="model" name="model_name">
+							<select class = "form-control" id="model" name="model_name" required>
         <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
                         <option value="{{models.model_name}}">{{models.model_name}}</option>
@@ -58,7 +58,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Score">Score</label>
-							<select class = "form-control" id="score" name="score">
+							<select class = "form-control" id="score" name="score" required>
         <option value="" disabled selected>Score</option>
                 {% for score in score %}      
                         <option value="{{score.score}}">{{score.score}}</option>
@@ -67,7 +67,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Review Text">Contents & Image</label>
-							<textarea name="review_text" placeholder="Write your review here" class="form-control" id="review_text" rows="5"></textarea>
+							<textarea name="review_text" placeholder="Write your review here" class="form-control" id="review_text" rows="5" required></textarea>
 						</div>
 						<div class="row no-gutters">
 							<div class="input-group mb-3 col">

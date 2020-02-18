@@ -21,11 +21,11 @@
 					<form action="{{ url_for('update_review', review_id=review._id) }}" method="POST" class="col s12">
 						<div class="row no-gutters">
 							<label class="lead" for="Title">Title</label>
-							<textarea id="review_text" class="form-control" name="review_title"  type="text" rows="1" class="form-control">{{review.review_title}}</textarea> 
+							<textarea id="review_text" class="form-control" name="review_title"  type="text" rows="1" class="form-control" required>{{review.review_title}}</textarea> 
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Category">Category (A-Z)</label>
-							<select class = "form-control" id="category" name="category_name">
+							<select class = "form-control" id="category" name="category_name" required>
                     <option value="" disabled selected>Choose Category</option>
                 {% for category in category %}      
                     {% if category.category_name == review.category_name %}
@@ -39,7 +39,7 @@
 
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Brand">Brand (A-Z)</label>
-							<select class = "form-control" id="brand" name="brand_name">
+							<select class = "form-control" id="brand" name="brand_name" required>
                     <option value="" disabled selected>Choose Brand</option>
                 {% for brands in brands %}
                     {% if brands.brand_name == review.brand_name %}      
@@ -53,7 +53,7 @@
 
 						<div class="row no-gutters">
 							<label class="lead" for="Choose Model">Model (A-Z)</label>
-							<select class = "form-control" id="model" name="model_name">
+							<select class = "form-control" id="model" name="model_name" required>
                     <option value="" disabled selected>Choose Model</option>
                 {% for models in models %}      
                     {% if models.model_name == review.model_name %}   
@@ -66,7 +66,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Score">Score</label>
-							<select class = "form-control" id="model" name="score">
+							<select class = "form-control" id="model" name="score" required>
                     <option value="" disabled selected>Score</option>
                 {% for score in score %}
                     {% if score.score == review.score %}         
@@ -79,7 +79,7 @@
 						</div>
 						<div class="row no-gutters">
 							<label class="lead" for="Review Text">Contents & Image</label>
-							<textarea name="review_text" class="form-control" id="review_text" rows="8">{{review.review_text}}</textarea>
+							<textarea name="review_text" class="form-control" id="review_text" rows="8" required>{{review.review_text}}</textarea>
 						</div>
 						<div class="row no-gutters">
 							<div class="input-group mb-3 col">

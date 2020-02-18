@@ -106,7 +106,7 @@ def logout():
 def add_review():
 
     if 'user' in session:
-        return render_template("write.html", category=mongo.db.category.find(), brands=mongo.db.brands.find(), models=mongo.db.models.find(), score=mongo.db.score.find())
+        return render_template("write.html", category=mongo.db.category.find().sort("category_name", 1), brands=mongo.db.brands.find().sort("brand_name", 1), models=mongo.db.models.find().sort("model_name", 1), score=mongo.db.score.find())
     else:
         flash("You must be logged in to do this!") #If they aren't, send them to the login page.
         return render_template("login.html")
