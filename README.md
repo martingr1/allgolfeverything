@@ -83,7 +83,7 @@ My main design philosophies were:
 4. Green, Grey, Yellow colour scheme to fit with golfing theme.
 5. Help users get to what they want in as few clicks as possible.
 
-[![Database Model](/martingr1/allgolfeverything/static/images/login_review.jpg "DB model")()
+[![Login and Review Mockups](/static/images/login_review.jpg "Login/Review Mockups")
 
 ## User stories 
 
