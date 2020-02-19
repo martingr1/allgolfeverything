@@ -122,7 +122,7 @@ Project Features
 
 ## Login, Authentication, Registration
 
-![Login confirmation](/static/images/login_confrimation.jpg "Login Confirmation")
+![Login confirmation](/static/images/login_confirmation.jpg "Login Confirmation")
 
 In order to access the site, users must first register and then login. 
 
@@ -138,7 +138,7 @@ registration page.
 
 ## Read
 
-![Review](/static/images/review.jpg "Review")
+![Review](/static/images/review_card.jpg "Review")
 
 Upon logging in successfully, users will be redirected to reviews.html and recieve a confirmation message at the top of the page
 telling them that they have been successfully logged in.
