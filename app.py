@@ -24,10 +24,11 @@ mongo = PyMongo(app)
 def get_index():
     return render_template("index.html")
 
+###### Login, Authentication, Registration ######
+
 @app.route('/get_login')
 def get_login():
     return render_template("login.html")
-
 
 @app.route('/login', methods=['GET'])
 def login():
@@ -101,6 +102,9 @@ def logout():
     else:
         flash("You are not logged in.")#If user is not logged in, display message and redirect to login template
         return render_template("login.html")
+
+
+###### Reviews ######
 
 @app.route('/add_review')
 def add_review():
@@ -217,36 +221,7 @@ def delete_review(review_id):
         flash("You must be logged in to do this!")#If there is no valid session, redirect to login page.
         return render_template("login.html")
 
-@app.route('/filter_reviews', methods=['POST'])
-def filter_reviews():
-
-    query = {} #create a query variable to pass to mongo and search the db
-    all_categories = mongo.db.category.find().sort("category_name", 1) 
-    all_brands = mongo.db.brands.find().sort("brand_name", 1) 
-    brands = request.form.get("brand_name")#get the value from brand input
-    categories = request.form.get("category_name")#get the value from category input
-    
-    if 'brand_name' in request.form: #if brand selector has a value
-        
-        if 'category_name' in request.form: #check if category selector also has a value
-            
-            query.update({"category_name": categories, "brand_name": brands}) #if both are true, create query and filter results
-            reviews = mongo.db.reviews.find(query)
-            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
-        
-        else: #if category has no value, use only the brand filter and return results in reviews template.
-            query.update({"brand_name": brands})
-            reviews = mongo.db.reviews.find(query)
-            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
-   
-    elif 'category_name' in request.form: #if brand has no value, check if category has a value
-        query.update({"category_name": categories})#if it does, filter by category.
-        reviews = mongo.db.reviews.find(query)
-        return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
-    
-    else:
-        all_reviews = mongo.db.reviews.find() #if neither has a value, reload the default template for reviews.
-        return render_template("reviews.html", reviews=all_reviews, brands=all_brands, category=all_categories)
+###### Insert ######
 
 @app.route('/insert_brand', methods=['POST'])
 def insert_brand():
@@ -294,6 +269,39 @@ def insert_model():
         flash("You must be logged in to do this!")
         return render_template("login.html")
 
+###### Searching and Filtering ######
+
+@app.route('/filter_reviews', methods=['POST'])
+def filter_reviews():
+
+    query = {} #create a query variable to pass to mongo and search the db
+    all_categories = mongo.db.category.find().sort("category_name", 1) 
+    all_brands = mongo.db.brands.find().sort("brand_name", 1) 
+    brands = request.form.get("brand_name")#get the value from brand input
+    categories = request.form.get("category_name")#get the value from category input
+    
+    if 'brand_name' in request.form: #if brand selector has a value
+        
+        if 'category_name' in request.form: #check if category selector also has a value
+            
+            query.update({"category_name": categories, "brand_name": brands}) #if both are true, create query and filter results
+            reviews = mongo.db.reviews.find(query)
+            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
+        
+        else: #if category has no value, use only the brand filter and return results in reviews template.
+            query.update({"brand_name": brands})
+            reviews = mongo.db.reviews.find(query)
+            return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
+   
+    elif 'category_name' in request.form: #if brand has no value, check if category has a value
+        query.update({"category_name": categories})#if it does, filter by category.
+        reviews = mongo.db.reviews.find(query)
+        return render_template("reviews.html", reviews=reviews, brands=all_brands, category=all_categories)
+    
+    else:
+        all_reviews = mongo.db.reviews.find() #if neither has a value, reload the default template for reviews.
+        return render_template("reviews.html", reviews=all_reviews, brands=all_brands, category=all_categories)
+
 @app.route('/search_reviews',  methods=["POST", "GET"])
 def search_reviews():
     
@@ -305,6 +313,8 @@ def search_reviews():
     else:
         flash("You must be logged in to do this!")
         return render_template("login.html") 
+
+###### Upvoting ######
 
 @app.route('/upvoted/<review_id>')
 def upvoted(review_id):

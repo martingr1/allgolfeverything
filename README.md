@@ -15,10 +15,9 @@ for amateur golfers to share their honest opinions on experiences they've had wi
 Deployment
 ======
 
-The app is deployed to Heroku and can be accessed [here](https://allgolfeverything.herokuapp.com/)
+The app is deployed to Heroku and can be accessed [here](https://allgolfeverything.herokuapp.com/) .
 
-Version control is implemented in git.
-
+Code is stored in my github repository [here](https://github.com/martingr1/allgolfeverything) .
 
 Project Criteria
 =====
@@ -58,6 +57,9 @@ The project criteria specified that MongoDB be used as the database for the proj
 
 After consideration and some testing, the above databse model was decided upon. This gave a suitably flexible structure to be able to allow users to Create, Read, 
 Update and Delete review documents in their own collection; whilst also being able to select and (in some cases) amend other key value pairs without affecting the review itself.
+
+In particular, this approach helped me to solve a bug where duplicate entries were being inserted into the databse for brand_name and model.
+By having separate collections I was able to control user inputs and prevent this from happening.
 
 All values were set as strings apart from 'upvote' in the reviews collection. This allowed for incremental python code ('$inc') to be 
 used to create a like function.
@@ -120,6 +122,8 @@ Project Features
 
 ## Login, Authentication, Registration
 
+![Login confirmation](/static/images/login_confrimation.jpg "Login Confirmation")
+
 In order to access the site, users must first register and then login. 
 
 This is done via the index.html page, where the user has the option to do either.
@@ -134,12 +138,16 @@ registration page.
 
 ## Read
 
+![Review](/static/images/review.jpg "Review")
+
 Upon logging in successfully, users will be redirected to reviews.html and recieve a confirmation message at the top of the page
 telling them that they have been successfully logged in.
 
 From here, they can automatically view the top 10 newest reviews left on the page.
 
 ## Search and Filter results
+
+![Filters](/static/images/filters.jpg "Filters")
 
 Users can filter results while on reviews.html by either category name or brand name to find what they are looking for quickly.
 
@@ -201,6 +209,55 @@ Please see the results of testing [here](/static/images/testing.pdf)
 
 Responsiveness was tested on Apple iPhone X, iPad, Samsung Galaxy S8 and Apple iPhone 5s. 
 
+Issues / Bugs
+=====
+
+Below are some bugs/issues that I encountered during development.
+
+## Upvotes
+
+Building upvoting functionality.
+
+### Expected Behavior
+
+User would submit a review, upvote key would insert automatically and when 'Like' button was clicked count would
+increment by 1.
+
+### Actual Behavior & Result
+
+User would submit a review, upvote key would insert automatically as a string. When 'Like' button was clicked
+error recieved as function could not increment a string.
+
+### Cause & Solution
+
+MongoDB submits values as strings by default if no other data type is specified. When '$inc' is then called on
+the value later, it raises an error because it can only be called on an integer.
+
+The solution is to add 'int' to request.form.get('upvote') when the review is created so that the value is set as
+an integer and the 'upvote' funtion will work when called.
+
+## Filters
+
+Building filter functions for reviews.
+
+### Expected Behavior
+
+User would select category, brand or both from dropdown and click 'Filter' button to see specfied results. Results would
+show on page as expected with filters applied.
+
+### Actual Behavior
+
+User would only be able to filter by brand, additional filters weren't applied.
+
+### Cause & Solution
+
+In order to solve this issue, I had to create a nested elif function in filter_reviews which allowed for
+the proper checks to be completed on each form inuput before going to the next stage.
+
+The steps the function now follows are below:
+
+![Filter Reviews](/static/images/filter_reviews_function.jpg "Filter Reviews")
+
 Acknowledgements 
 =====
 
@@ -209,14 +266,16 @@ For additional functionality beyond the lesson code, the following proved very u
 1. [Flask Login - Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&t=2519s)
 2. [Flask Messaging - Pretty Printed](https://www.youtube.com/watch?v=DFCKWhoiHZ4)
 3. [Flask Security- Pretty Printed](https://www.youtube.com/watch?v=LsHf3JSDBVc&t=622s)
-4. [MongoDB - Kristina Chodorow](https://www.amazon.co.uk/Kristina-Chodorow-MongoDB-Definitive-Guide/dp/B00HTJQQ9O/ref=sr_1_4?keywords=mongodb+kristina&qid=1582035158&s=digital-text&sr=1-4-catcorr)
-5. [MongoDB Tutorial - Coding Simplified](https://www.youtube.com/watch?v=pQeiXM1-Upw&t=2s)
-6. [Stack Overflow](https://stackoverflow.com/)
-7. [Python Query Filters - Pretty Printed](https://www.youtube.com/watch?v=D5l5Gf7PoJA&t=298s)
-8. [Python - Timothy Needham](https://www.amazon.co.uk/Python-Beginners-programming-web-programming-programmer-ebook/dp/B075JGW5YK)
+4. [Lead Sessions - Miroslav Svec](https://github.com/MiroslavSvec/DCD_lead)
+5. [MongoDB - Kristina Chodorow](https://www.amazon.co.uk/Kristina-Chodorow-MongoDB-Definitive-Guide/dp/B00HTJQQ9O/ref=sr_1_4?keywords=mongodb+kristina&qid=1582035158&s=digital-text&sr=1-4-catcorr)
+6. [MongoDB Tutorial - Coding Simplified](https://www.youtube.com/watch?v=pQeiXM1-Upw&t=2s)
+7. [Stack Overflow](https://stackoverflow.com/)
+8. [Python Query Filters - Pretty Printed](https://www.youtube.com/watch?v=D5l5Gf7PoJA&t=298s)
+9. [Python - Timothy Needham](https://www.amazon.co.uk/Python-Beginners-programming-web-programming-programmer-ebook/dp/B075JGW5YK)
 
-In general, the Code Institute Slack channel has been an invaluable resource. In addition, thanks are owed to the CI tutors
-for their patience in helping me solve coding problems and encouraging me to find answers to issues.
+In general, the Code Institute Slack channel has been an invaluable resource to search through for ideas on how to solve problems. 
+
+In addition, thanks are owed to the CI tutors for their patience in helping me solve coding problems and encouraging me to find answers to issues.
 
 Future Features
 =====
@@ -229,3 +288,4 @@ The list below is not exhaustive and will be added to over time in order to keep
 2. User Profiles.
 3. Image hosting.
 4. Fully functioning affiliate links.
+5. Additional filters
